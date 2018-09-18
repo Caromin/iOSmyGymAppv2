@@ -17,7 +17,9 @@ EStyleSheet.build({
   $defaultTextColor: "#fff",
   $successTextColor: "#5cb85c",
   $dangerTextColor: "#d9534f",
-  $verySuccessTextColor: "#FFD700"
+  $verySuccessTextColor: "#FFD700",
+
+  $outline: 1
 });
 
 const options = {
@@ -42,7 +44,7 @@ const HomeStack = createStackNavigator(
 
 const ProgramStack = createStackNavigator(
   {
-    Program: ProgramContainer
+    Programs: ProgramContainer
   },
   options
 );
@@ -57,9 +59,9 @@ const SettingsStack = createStackNavigator(
 // each stack is one tab point
 const MainStack = createBottomTabNavigator(
   {
+    Settings: SettingsStack,
     Home: HomeStack,
-    Program: ProgramStack,
-    Settings: SettingsStack
+    Programs: ProgramStack
   },
   {
     navigationOptions: ({ navigation }) => ({
@@ -74,12 +76,13 @@ const MainStack = createBottomTabNavigator(
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
         let iconName;
+        // requires outline because of the focus/active object
         if (routeName === "Home") {
           iconName = `ios-information-circle${focused ? "" : "-outline"}`;
         } else if (routeName === "Settings") {
           iconName = `ios-options${focused ? "" : "-outline"}`;
-        } else if (routeName === "Program") {
-          iconName = `ios-options${focused ? "" : "-outline"}`;
+        } else if (routeName === "Programs") {
+          iconName = `ios-star${focused ? "" : "-outline"}`;
         }
 
         // You can return any component that you like here! We usually use an
