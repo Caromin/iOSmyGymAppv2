@@ -1,1 +1,3 @@
-Hi.
+Status: In-process...
+
+Components folder is ignored to hide main codebase.
