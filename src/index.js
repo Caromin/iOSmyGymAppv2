@@ -12,9 +12,10 @@ import ProgramContainer from "./components/Program/ProgramContainer";
 import SettingsContainer from "./components/Settings/SettingsContainer";
 import ModalContainer from "./components/Modal/ModalContainer";
 
+// cannot create premade objects, only variables
 EStyleSheet.build({
   // always call EStyleSheet.build() even if you don't use global variables!
-  $defaultTextColor: "#fff",
+  $defaultTextColor: "#000",
   $successTextColor: "#5cb85c",
   $dangerTextColor: "#d9534f",
   $verySuccessTextColor: "#FFD700",
@@ -27,12 +28,25 @@ const options = {
     headerStyle: {
       backgroundColor: "#f4511e"
     },
-    headerTintColor: "#fff",
+    headerTintColor: "#000",
     headerTitleStyle: {
       fontWeight: "bold"
     }
   }
 };
+
+export const globalStyles = EStyleSheet.create({
+  defaultText: {
+    textAlign: "justify",
+    fontSize: 16,
+    color: "$defaultTextColor",
+    paddingLeft: 10,
+    fontWeight: "500"
+  },
+  redBg: {
+    backgroundColor: "$dangerTextColor"
+  }
+});
 
 // seperate stack of 'cards' for each of the tab navigator
 const HomeStack = createStackNavigator(
@@ -92,7 +106,7 @@ const MainStack = createBottomTabNavigator(
     }),
     tabBarOptions: {
       activeTintColor: "#f4511e",
-      inactiveTintColor: "gray"
+      inactiveTintColor: "#000000"
     }
   }
 );
@@ -113,7 +127,7 @@ const RootStack = createStackNavigator(
   }
 );
 
-export default class Root extends Component {
+export class Root extends Component {
   render() {
     return <RootStack />;
   }
