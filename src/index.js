@@ -18,9 +18,9 @@ EStyleSheet.build({
   $defaultTextColor: "#000",
   $successTextColor: "#5cb85c",
   $dangerTextColor: "#d9534f",
-  $verySuccessTextColor: "#FFD700",
+  $verySuccessTextColor: "#FFD700"
 
-  $outline: 1
+  // $outline: 1
 });
 
 const options = {
@@ -44,6 +44,13 @@ export const globalStyles = EStyleSheet.create({
     fontWeight: "500"
   },
   redBg: {
+    backgroundColor: "$dangerTextColor"
+  },
+  verticalMargins: {
+    marginTop: 10,
+    marginBottom: 10
+  },
+  redButton: {
     backgroundColor: "$dangerTextColor"
   }
 });
