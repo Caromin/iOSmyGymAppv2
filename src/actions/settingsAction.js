@@ -1,7 +1,10 @@
 export const DISTANCE_SETTINGS = "DISTANCE_SETTINGS";
 export const WEIGHT_SETTINGS = "WEIGHT_SETTINGS";
-export const PERSONAL_WEIGHT = "PERSONAL_WEIGHT";
+// export const PERSONAL_WEIGHT = "PERSONAL_WEIGHT";
+// export const CALORIES_BURNED = "CALORIES_BURNED";
+export const ALLINPUT_SETTINGS = "ALLINPUT_SETTINGS";
 
+// settings button lists
 export const settingsAction = (buttonGroupName, actionId) => dispatch => {
   switch (buttonGroupName) {
     case "distance":
@@ -19,4 +22,12 @@ export const settingsAction = (buttonGroupName, actionId) => dispatch => {
     default:
       alert("There was an error somewhere");
   }
+};
+
+// settings input options
+export const settingsInputs = data => dispatch => {
+  dispatch({
+    type: ALLINPUT_SETTINGS,
+    payload: data
+  });
 };

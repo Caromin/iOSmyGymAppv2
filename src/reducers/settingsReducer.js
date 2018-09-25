@@ -1,14 +1,15 @@
 import {
   DISTANCE_SETTINGS,
   WEIGHT_SETTINGS,
-  PERSONAL_WEIGHT
+  ALLINPUT_SETTINGS
 } from "../actions/settingsAction";
 
 export const inititalState = {
   profile: {
     weight: 150,
-    distanceSettings: "mi",
-    weightSettings: "lb"
+    caloriesBurned: 100,
+    distanceSettings: "",
+    weightSettings: ""
   }
 };
 
@@ -29,8 +30,14 @@ export default function(state = inititalState, action) {
           weightSettings: conversion
         }
       };
-    case PERSONAL_WEIGHT:
-      return state;
+    case ALLINPUT_SETTINGS:
+      return {
+        ...state,
+        profile: {
+          weight: action.payload.weight,
+          caloriesBurned: action.payload.calories
+        }
+      };
     default:
       return state;
   }
