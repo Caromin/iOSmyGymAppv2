@@ -6,6 +6,7 @@
 # dependencies
 /node_modules
 /src/components
+/src/apiKeys/ApiKeys.js
 
 # misc
 .env.local

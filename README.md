@@ -9,4 +9,4 @@ Everything is tentative, until final production build.
 
 **Settings Screen**
 
-![image2](https://user-images.githubusercontent.com/12276056/45793924-2c3fdd80-bc62-11e8-8593-cdab467c298b.png)
+![45793924-2c3fdd80-bc62-11e8-8593-cdab467c298b](https://user-images.githubusercontent.com/12276056/46058162-9a374980-c127-11e8-976d-6042df079c23.png)

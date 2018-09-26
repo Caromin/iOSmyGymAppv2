@@ -6,7 +6,7 @@ import {
 
 export const inititalState = {
   profile: {
-    weight: 150,
+    weight: 100,
     caloriesBurned: 100,
     distanceSettings: "",
     weightSettings: ""
@@ -19,6 +19,7 @@ export default function(state = inititalState, action) {
       return {
         ...state,
         profile: {
+          ...state.profile,
           distanceSettings: action.payload
         }
       };
@@ -27,6 +28,7 @@ export default function(state = inititalState, action) {
       return {
         ...state,
         profile: {
+          ...state.profile,
           weightSettings: conversion
         }
       };
@@ -34,6 +36,7 @@ export default function(state = inititalState, action) {
       return {
         ...state,
         profile: {
+          ...state.profile,
           weight: action.payload.weight,
           caloriesBurned: action.payload.calories
         }
