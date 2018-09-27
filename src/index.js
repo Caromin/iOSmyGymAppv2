@@ -18,11 +18,16 @@ import ApiKeys from "./apiKeys/ApiKeys";
 EStyleSheet.build({
   // always call EStyleSheet.build() even if you don't use global variables!
   $defaultTextColor: "#000",
+  // green
   $successTextColor: "#5cb85c",
+  // red
   $dangerTextColor: "#d9534f",
-  $verySuccessTextColor: "#FFD700",
+  // blue
+  $primaryTextColor: "#337ab7",
+  // gold
+  $verySuccessTextColor: "#FFD700"
 
-  $outline: 1
+  // $outline: 1
 });
 
 const options = {
@@ -54,6 +59,13 @@ export const globalStyles = EStyleSheet.create({
   },
   redButton: {
     backgroundColor: "$dangerTextColor"
+  },
+  greenButton: {
+    backgroundColor: "$successTextColor"
+  },
+
+  blueButton: {
+    backgroundColor: "$primaryTextColor"
   }
 });
 
@@ -82,9 +94,9 @@ const SettingsStack = createStackNavigator(
 // each stack is one tab point
 const MainStack = createBottomTabNavigator(
   {
-    Settings: SettingsStack,
+    Programs: ProgramStack,
     Home: HomeStack,
-    Programs: ProgramStack
+    Settings: SettingsStack
   },
   {
     navigationOptions: ({ navigation }) => ({
