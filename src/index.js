@@ -95,8 +95,8 @@ const SettingsStack = createStackNavigator(
 const MainStack = createBottomTabNavigator(
   {
     Programs: ProgramStack,
-    Home: HomeStack,
-    Settings: SettingsStack
+    Settings: SettingsStack,
+    Home: HomeStack
   },
   {
     navigationOptions: ({ navigation }) => ({
