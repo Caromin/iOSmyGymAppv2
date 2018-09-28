@@ -1,7 +1,10 @@
 import { ADD_NEW_PROGRAM } from "../actions/programActions";
 
 export const inititalState = {
-  programList: [{ title: "Title", description: "Dez Nuts, got em" }]
+  programList: [
+    { title: "Title", description: "Dez Nuts, got em" },
+    { title: "Title2", description: "Description2" }
+  ]
 };
 
 export default function(state = inititalState, action) {
