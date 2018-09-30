@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { connect } from "react-redux";
 import * as firebase from "firebase";
 import { withNavigationFocus } from "react-navigation";
+import PropTypes from "prop-types";
 
 import Settings from "./Settings";
 // remember to use this.props
@@ -98,6 +99,11 @@ class SettingsContainer extends Component {
     );
   }
 }
+
+SettingsContainer.propTypes = {
+  personalWeight: PropTypes.number,
+  caloriesBurned: PropTypes.number
+};
 
 const mapStateToProps = state => ({
   personalWeight: state.settingsReducer.profile.weight,

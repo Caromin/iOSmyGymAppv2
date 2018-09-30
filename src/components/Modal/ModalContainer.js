@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View } from "react-native";
+import PropTypes from "prop-types";
 
 import Modal from "./Modal";
 import { ReturnButton } from "../Buttons/Buttons";
@@ -39,3 +40,5 @@ export default class ModalContainer extends Component {
     );
   }
 }
+
+ModalContainer.propTypes = {};

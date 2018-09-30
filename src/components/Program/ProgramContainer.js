@@ -3,8 +3,11 @@ import { Text, View } from "react-native";
 import * as firebase from "firebase";
 require("firebase/firestore");
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { AsyncStorage } from "react-native";
 
 import Program from "./Program";
+import { getLocalAction } from "../../actions/programActions";
 import { CreateButton } from "../Buttons/Buttons";
 import { globalStyles } from "../../index";
 
@@ -19,12 +22,34 @@ class ProgramContainer extends Component {
       db: firebase.firestore()
     };
     this.addToDatabase = this.addToDatabase.bind(this);
-    // this.generateNewList = this.generateNewList.bind(this);
+    this.setStorage = this.setStorage.bind(this);
+    this.getStorage = this.getStorage.bind(this);
   }
 
   componentWillMount = () => {
     this.state.db.settings({
       timestampsInSnapshots: true
+    });
+
+    // Use setStorage if you clear the current async storage.
+    // AsyncStorage.clear();
+    // this.setStorage();
+    this.getStorage();
+  };
+
+  componentDidUpdate() {
+    this.setStorage();
+  }
+
+  setStorage = async () => {
+    const parsedList = JSON.stringify(this.props.programList);
+    await AsyncStorage.setItem("list", parsedList);
+  };
+
+  getStorage = async () => {
+    username = await AsyncStorage.getItem("list").then(value => {
+      const completedList = JSON.parse(value);
+      this.props.getLocalAction(completedList);
     });
   };
 
@@ -42,20 +67,26 @@ class ProgramContainer extends Component {
   }
 
   render() {
-    const { programList } = this.props;
-    const { navigation } = this.props;
+    const { navigation, programList } = this.props;
 
     return (
       <View style={{ flex: 1 }}>
         <Program add={this.addToDatabase} programList={programList} />
-        <CreateButton navigation={this.props.navigation} />
+        <CreateButton navigation={navigation} />
       </View>
     );
   }
 }
 
+ProgramContainer.propTypes = {
+  programList: PropTypes.array
+};
+
 const mapStateToProps = state => ({
   programList: state.programReducer.programList
 });
 
-export default connect(mapStateToProps)(ProgramContainer);
+export default connect(
+  mapStateToProps,
+  { getLocalAction }
+)(ProgramContainer);

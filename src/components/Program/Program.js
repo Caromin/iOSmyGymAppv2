@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
 import { List, ListItem } from "react-native-elements";
+import uuidv1 from "uuid/v1";
 
 import { globalStyles } from "../../index";
 
@@ -10,7 +11,7 @@ const Program = ({ add, programList }) => {
       roundAvatar
       avatar={{}}
       avatarContainerStyle={{ backgroundColor: "#d9534f" }}
-      key={obj.title}
+      key={uuidv1()}
       title={obj.title}
       subtitle={obj.description}
       onPress={() => {

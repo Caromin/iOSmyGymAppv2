@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { Text, View, Button } from "react-native";
+import { View } from "react-native";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import Home from "./Home";
 import styles from "./styles";
@@ -44,6 +45,12 @@ class HomeContainer extends Component {
     );
   }
 }
+
+HomeContainer.propTypes = {
+  weightId: PropTypes.string,
+  personalWeight: PropTypes.number,
+  caloriesBurned: PropTypes.number
+};
 
 const mapStateToProps = state => ({
   weightId: state.settingsReducer.profile.weightSettings,
