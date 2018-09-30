@@ -5,28 +5,31 @@ import { FormLabel, FormInput, ButtonGroup } from "react-native-elements";
 import CompleteButton from "../../Buttons/Buttons";
 import { globalStyles } from "../../../index";
 
-const CreateModal = ({ status, navigation, update }) => {
+const CreateModal = ({ navEdit, status, navigation, update, navEditData }) => {
   const difficultyButtons = ["EASY", "MEDIUM", "HARD"];
+
   return (
     <View style={{ flex: 1 }}>
       <FormLabel>Program Name:</FormLabel>
       <FormInput
-        placeholder={"Shoulders Only"}
+        placeholder={navEdit ? navEditData.title : "Shoulders Only"}
         onChangeText={value => {
           const id = "programTitle";
-          console.log(value);
           update(id, value);
         }}
       />
       <FormLabel>Description:</FormLabel>
       <FormInput
-        placeholder={"4 days a week program"}
+        placeholder={
+          navEdit ? navEditData.description : "4 days a week program"
+        }
         onChangeText={value => {
           const id = "programDescription";
           update(id, value);
         }}
       />
-      <View style={{ paddingTop: 20 }}>
+      <FormLabel>Difficulty:</FormLabel>
+      <View style={{ paddingTop: 10 }}>
         <ButtonGroup
           buttons={difficultyButtons}
           // this is to show which index is active
@@ -39,7 +42,12 @@ const CreateModal = ({ status, navigation, update }) => {
           selectedButtonStyle={globalStyles.redBg}
         />
       </View>
-      <CompleteButton navigation={navigation} status={status} />
+      <CompleteButton
+        navEdit={navEdit}
+        navEditData={navEditData}
+        navigation={navigation}
+        status={status}
+      />
     </View>
   );
 };

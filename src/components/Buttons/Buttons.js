@@ -6,7 +6,10 @@ import uuidv1 from "uuid/v1";
 
 import { globalStyles } from "../../index";
 import styles from "./styles";
-import { addProgramAction } from "../../actions/programActions";
+import {
+  addProgramAction,
+  editProgramAction
+} from "../../actions/programActions";
 
 export const CreateButton = ({ navigation }) => {
   // console.log(navigation);
@@ -33,9 +36,9 @@ class CompleteButton extends Component {
     super(props);
   }
   render() {
-    const { navigation, status } = this.props;
+    const { navigation, status, navEdit, navEditData } = this.props;
     const data = {
-      id: uuidv1(),
+      id: navEdit ? navEditData.id : uuidv1(),
       title: status.programTitle === "" ? "Title" : status.programTitle,
       description:
         status.programDescription === ""
@@ -55,7 +58,9 @@ class CompleteButton extends Component {
             color: "black"
           }}
           onPress={() => {
-            this.props.addProgramAction(data);
+            navEdit
+              ? this.props.editProgramAction(data)
+              : this.props.addProgramAction(data);
             navigation.navigate("Programs");
           }}
           title="Complete"
@@ -99,7 +104,7 @@ export const ReturnButton = ({ navigation }) => {
           type: "feather",
           color: "black"
         }}
-        borderRadius={10}
+        borderRadius={5}
       />
     </View>
   );
@@ -107,5 +112,5 @@ export const ReturnButton = ({ navigation }) => {
 
 export default connect(
   null,
-  { addProgramAction }
+  { addProgramAction, editProgramAction }
 )(CompleteButton);

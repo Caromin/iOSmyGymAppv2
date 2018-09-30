@@ -41,11 +41,15 @@ export default class ModalContainer extends Component {
     // none is a fallback option, if no param passed
     const navParam = navigation.getParam("selected", "none");
     const navCreate = navigation.getParam("createProgram", false);
+    const navEdit = navigation.getParam("editing", false);
+    const navEditData = navigation.getParam("currentObj", null);
 
     return (
       <View style={{ flex: 1 }}>
         <ReturnButton navigation={navigation} />
         <Modal
+          navEditData={navEditData}
+          navEdit={navEdit}
           navParam={navParam}
           navCreate={navCreate}
           status={this.state}

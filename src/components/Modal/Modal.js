@@ -4,7 +4,15 @@ import { View, Keyboard, TouchableWithoutFeedback } from "react-native";
 import CreateModal from "./CreateModal/CreateModal";
 import HomeModal from "./HomeModal/HomeModal";
 
-const Modal = ({ navParam, navCreate, status, update, navigation }) => {
+const Modal = ({
+  navEdit,
+  navParam,
+  navCreate,
+  status,
+  update,
+  navigation,
+  navEditData
+}) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View
@@ -13,8 +21,10 @@ const Modal = ({ navParam, navCreate, status, update, navigation }) => {
           marginTop: 20
         }}
       >
-        {navCreate ? (
+        {navCreate || navEdit ? (
           <CreateModal
+            navEditData={navEditData}
+            navEdit={navEdit}
             navigation={navigation}
             status={status}
             update={update}

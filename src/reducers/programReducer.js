@@ -1,7 +1,8 @@
 import {
   ADD_NEW_PROGRAM,
   GET_LOCAL_ACTION,
-  REMOVE_PROGRAM
+  REMOVE_PROGRAM,
+  EDIT_PROGRAM
 } from "../actions/programActions";
 
 export const inititalState = {
@@ -18,6 +19,60 @@ export const inititalState = {
       description: "This is the description",
       difficulty: "#FFD700"
     }
+    // {
+    //   id: 3,
+    //   title: "Example 1",
+    //   description: "This is the description",
+    //   difficulty: "#d9534f"
+    // },
+    // {
+    //   id: 4,
+    //   title: "Example 2",
+    //   description: "This is the description",
+    //   difficulty: "#FFD700"
+    // },
+    // {
+    //   id: 5,
+    //   title: "Example 1",
+    //   description: "This is the description",
+    //   difficulty: "#d9534f"
+    // },
+    // {
+    //   id: 6,
+    //   title: "Example 2",
+    //   description: "This is the description",
+    //   difficulty: "#FFD700"
+    // },
+    // {
+    //   id: 7,
+    //   title: "Example 1",
+    //   description: "This is the description",
+    //   difficulty: "#d9534f"
+    // },
+    // {
+    //   id: 8,
+    //   title: "Example 2",
+    //   description: "This is the description",
+    //   difficulty: "#FFD700"
+    // },
+    // {
+    //   id: 9,
+    //   title: "Example 1",
+    //   description: "This is the description",
+    //   difficulty: "#d9534f"
+    // },
+    // {
+    //   id: 10,
+    //   title: "Example 2",
+    //   description: "This is the description",
+    //   difficulty: "#FFD700"
+    // },
+    // {
+    //   id: 11,
+    //   title: "Example 2",
+    //   description: "This is the description",
+    //   difficulty: "#FFD700"
+    // }
   ]
 };
 
@@ -37,11 +92,21 @@ export default function(state = inititalState, action) {
         ...state,
         programList: [...state.programList, action.payload]
       };
-
+    case EDIT_PROGRAM:
+      const editedArr = state.programList.map(index => {
+        if (action.payload.id === index.id) {
+          return action.payload;
+        } else {
+          return index;
+        }
+      });
+      return {
+        ...state,
+        programList: editedArr
+      };
     case REMOVE_PROGRAM:
       const arr = state.programList.filter(index => {
         if (index.id !== action.payload) {
-          console.log(index);
           return index;
         }
       });

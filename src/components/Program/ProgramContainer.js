@@ -34,7 +34,7 @@ class ProgramContainer extends Component {
     });
 
     // Use setStorage if you clear the current async storage.
-    AsyncStorage.clear();
+    // AsyncStorage.clear();
     // this.setStorage();
     this.getStorage();
   };
@@ -74,9 +74,9 @@ class ProgramContainer extends Component {
     return (
       <View style={{ flex: 1 }}>
         <Program
-          add={this.addToDatabase}
           programList={programList}
           removeList={removeProgramAction}
+          navigation={navigation}
         />
         <CreateButton navigation={navigation} />
       </View>
@@ -85,7 +85,7 @@ class ProgramContainer extends Component {
 }
 
 ProgramContainer.propTypes = {
-  programList: PropTypes.array
+  programList: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
