@@ -1,23 +1,38 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
 import { List, ListItem } from "react-native-elements";
-import uuidv1 from "uuid/v1";
+import Swipeout from "react-native-swipeout";
 
-import { globalStyles } from "../../index";
+const Program = ({ programList, removeList }) => {
+  // each object is a new button style
+  const swipeoutBtns = id => {
+    return [
+      {
+        text: "Delete",
+        backgroundColor: "#d9534f",
+        color: "#000",
+        underlayColor: "rgba(217, 83, 79, 0.8)",
+        onPress: () => {
+          removeList(id);
+        }
+      }
+    ];
+  };
 
-const Program = ({ add, programList }) => {
   const postItems = programList.map(obj => (
-    <ListItem
-      roundAvatar
-      avatar={{}}
-      avatarContainerStyle={{ backgroundColor: "#d9534f" }}
-      key={uuidv1()}
-      title={obj.title}
-      subtitle={obj.description}
-      onPress={() => {
-        console.log("no functions");
-      }}
-    />
+    <Swipeout key={obj.id} right={swipeoutBtns(obj.id)}>
+      <ListItem
+        roundAvatar
+        avatar={{}}
+        avatarContainerStyle={{ backgroundColor: obj.difficulty }}
+        title={obj.title}
+        subtitle={obj.description}
+        subtitleStyle={{ fontSize: 12, fontWeight: "200", letterSpacing: 0.5 }}
+        onPress={() => {
+          console.log(obj.id);
+        }}
+      />
+    </Swipeout>
   ));
 
   return (

@@ -9,13 +9,29 @@ export default class ModalContainer extends Component {
   constructor() {
     super();
     this.state = {
-      programName: "",
-      programDescription: ""
+      programTitle: "",
+      programDescription: "",
+      difficulty: "",
+      difficultyId: null
     };
     this.updateState = this.updateState.bind(this);
   }
 
   updateState(statusId, value) {
+    statusId === "difficulty" ? this.setState({ difficultyId: value }) : null;
+    switch (value) {
+      case 0:
+        value = "#5cb85c";
+        break;
+      case 1:
+        value = "#FFD700";
+        break;
+      case 2:
+        value = "#d9534f";
+        break;
+      default:
+        break;
+    }
     this.setState({ [statusId]: value });
   }
 

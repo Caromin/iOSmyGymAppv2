@@ -7,9 +7,11 @@ import PropTypes from "prop-types";
 import { AsyncStorage } from "react-native";
 
 import Program from "./Program";
-import { getLocalAction } from "../../actions/programActions";
+import {
+  getLocalAction,
+  removeProgramAction
+} from "../../actions/programActions";
 import { CreateButton } from "../Buttons/Buttons";
-import { globalStyles } from "../../index";
 
 class ProgramContainer extends Component {
   static navigationOptions = {
@@ -32,7 +34,7 @@ class ProgramContainer extends Component {
     });
 
     // Use setStorage if you clear the current async storage.
-    // AsyncStorage.clear();
+    AsyncStorage.clear();
     // this.setStorage();
     this.getStorage();
   };
@@ -67,11 +69,15 @@ class ProgramContainer extends Component {
   }
 
   render() {
-    const { navigation, programList } = this.props;
+    const { navigation, programList, removeProgramAction } = this.props;
 
     return (
       <View style={{ flex: 1 }}>
-        <Program add={this.addToDatabase} programList={programList} />
+        <Program
+          add={this.addToDatabase}
+          programList={programList}
+          removeList={removeProgramAction}
+        />
         <CreateButton navigation={navigation} />
       </View>
     );
@@ -88,5 +94,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getLocalAction }
+  { getLocalAction, removeProgramAction }
 )(ProgramContainer);

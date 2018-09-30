@@ -1,8 +1,8 @@
 import React from "react";
-import { View, Text, Keyboard, TouchableWithoutFeedback } from "react-native";
-import { FormLabel, FormInput } from "react-native-elements";
+import { View, Keyboard, TouchableWithoutFeedback } from "react-native";
 
-import CompleteButton from "../Buttons/Buttons";
+import CreateModal from "./CreateModal/CreateModal";
+import HomeModal from "./HomeModal/HomeModal";
 
 const Modal = ({ navParam, navCreate, status, update, navigation }) => {
   return (
@@ -14,27 +14,13 @@ const Modal = ({ navParam, navCreate, status, update, navigation }) => {
         }}
       >
         {navCreate ? (
-          <View style={{ flex: 1 }}>
-            <FormLabel>Program Name:</FormLabel>
-            <FormInput
-              placeholder={"Shoulders Only"}
-              onChangeText={value => {
-                const id = "programName";
-                update(id, value);
-              }}
-            />
-            <FormLabel>Description:</FormLabel>
-            <FormInput
-              placeholder={"4 days a week program"}
-              onChangeText={value => {
-                const id = "programDescription";
-                update(id, value);
-              }}
-            />
-            <CompleteButton navigation={navigation} status={status} />
-          </View>
+          <CreateModal
+            navigation={navigation}
+            status={status}
+            update={update}
+          />
         ) : (
-          <Text>Currently Selected: {navParam}</Text>
+          <HomeModal navParam={navParam} />
         )}
       </View>
     </TouchableWithoutFeedback>

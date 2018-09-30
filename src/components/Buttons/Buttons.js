@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View } from "react-native";
 import { Button } from "react-native-elements";
 import { connect } from "react-redux";
+import uuidv1 from "uuid/v1";
 
 import { globalStyles } from "../../index";
 import styles from "./styles";
@@ -34,8 +35,13 @@ class CompleteButton extends Component {
   render() {
     const { navigation, status } = this.props;
     const data = {
-      title: status.programName,
-      description: status.programDescription
+      id: uuidv1(),
+      title: status.programTitle === "" ? "Title" : status.programTitle,
+      description:
+        status.programDescription === ""
+          ? "description"
+          : status.programDescription,
+      difficulty: status.difficulty === "" ? "#dedede" : status.difficulty
     };
     return (
       <View style={styles.defaultView}>
@@ -81,7 +87,7 @@ export const SaveButton = ({ buttonStatus, saveInputs }) => {
 
 export const ReturnButton = ({ navigation }) => {
   return (
-    <View style={{ width: "30%", marginTop: 50 }}>
+    <View style={{ width: "30%", marginTop: 25 }}>
       <Button
         onPress={() => navigation.goBack()}
         large={false}

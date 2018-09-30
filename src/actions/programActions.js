@@ -1,5 +1,6 @@
 export const ADD_NEW_PROGRAM = "ADD_NEW_PROGRAM";
 export const GET_LOCAL_ACTION = "GET_LOCAL_ACTION";
+export const REMOVE_PROGRAM = "REMOVE_PROGRAM";
 
 export const getLocalAction = data => dispatch => {
   // console.log(data)
@@ -13,6 +14,13 @@ export const addProgramAction = data => dispatch => {
   // console.log(data)
   dispatch({
     type: ADD_NEW_PROGRAM,
+    payload: data
+  });
+};
+
+export const removeProgramAction = data => dispatch => {
+  dispatch({
+    type: REMOVE_PROGRAM,
     payload: data
   });
 };
