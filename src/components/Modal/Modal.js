@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { FormLabel, FormInput } from "react-native-elements";
 
-import { CompleteButton } from "../Buttons/Buttons";
+import CompleteButton from "../Buttons/Buttons";
 
 const Modal = ({ navParam, navCreate, status, update, navigation }) => {
   return (

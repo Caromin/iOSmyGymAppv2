@@ -2,15 +2,15 @@ import { ADD_NEW_PROGRAM } from "../actions/programActions";
 
 export const inititalState = {
   programList: [
-    { title: "Title", description: "Dez Nuts, got em" },
-    { title: "Title2", description: "Description2" }
+    { title: "Title", description: "Working1" },
+    { title: "Title2", description: "Working2" }
   ]
 };
 
 export default function(state = inititalState, action) {
   switch (action.type) {
     case ADD_NEW_PROGRAM:
-      console.log("inside reducer", action.payload.title);
+      console.log(action.payload);
       return {
         ...state,
         programList: [...state.programList, action.payload]

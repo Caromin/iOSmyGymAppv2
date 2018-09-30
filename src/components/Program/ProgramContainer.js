@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import Program from "./Program";
 import { CreateButton } from "../Buttons/Buttons";
 import { globalStyles } from "../../index";
-import { addProgramAction } from "../../actions/programActions";
 
 class ProgramContainer extends Component {
   static navigationOptions = {
@@ -20,6 +19,7 @@ class ProgramContainer extends Component {
       db: firebase.firestore()
     };
     this.addToDatabase = this.addToDatabase.bind(this);
+    // this.generateNewList = this.generateNewList.bind(this);
   }
 
   componentWillMount = () => {
@@ -27,15 +27,6 @@ class ProgramContainer extends Component {
       timestampsInSnapshots: true
     });
   };
-
-  componentDidUpdate() {
-    let newProgram = this.props.navigation.getParam("completed", false);
-    const data = {
-      title: this.props.navigation.getParam("name"),
-      description: this.props.navigation.getParam("description")
-    };
-    const addProgramAction = this.props.addProgramAction(data);
-  }
 
   addToDatabase(bodyPart, data) {
     this.state.db
@@ -67,7 +58,4 @@ const mapStateToProps = state => ({
   programList: state.programReducer.programList
 });
 
-export default connect(
-  mapStateToProps,
-  { addProgramAction }
-)(ProgramContainer);
+export default connect(mapStateToProps)(ProgramContainer);

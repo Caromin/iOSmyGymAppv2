@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { View } from "react-native";
 import { Button } from "react-native-elements";
 import { connect } from "react-redux";
@@ -27,33 +27,37 @@ export const CreateButton = ({ navigation }) => {
   );
 };
 
-export const CompleteButton = ({ navigation, status }) => {
-  const name = status.programName;
-  const description = status.programDescription;
-
-  return (
-    <View style={styles.defaultView}>
-      <Button
-        large
-        buttonStyle={[globalStyles.greenButton, { width: "100%" }]}
-        textStyle={{ color: "#000" }}
-        icon={{
-          name: "check-circle",
-          type: "feather",
-          color: "black"
-        }}
-        onPress={() => {
-          navigation.navigate("Programs", {
-            completed: true,
-            name,
-            description
-          });
-        }}
-        title="Complete"
-      />
-    </View>
-  );
-};
+class CompleteButton extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    const { navigation, status } = this.props;
+    const data = {
+      title: status.programName,
+      description: status.programDescription
+    };
+    return (
+      <View style={styles.defaultView}>
+        <Button
+          large
+          buttonStyle={[globalStyles.greenButton, { width: "100%" }]}
+          textStyle={{ color: "#000" }}
+          icon={{
+            name: "check-circle",
+            type: "feather",
+            color: "black"
+          }}
+          onPress={() => {
+            this.props.addProgramAction(data);
+            navigation.navigate("Programs");
+          }}
+          title="Complete"
+        />
+      </View>
+    );
+  }
+}
 
 export const SaveButton = ({ buttonStatus, saveInputs }) => {
   return (
@@ -95,7 +99,7 @@ export const ReturnButton = ({ navigation }) => {
   );
 };
 
-connect(
+export default connect(
   null,
   { addProgramAction }
 )(CompleteButton);
