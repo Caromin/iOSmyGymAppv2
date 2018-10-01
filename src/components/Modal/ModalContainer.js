@@ -3,7 +3,6 @@ import { View } from "react-native";
 import PropTypes from "prop-types";
 
 import Modal from "./Modal";
-import { ReturnButton } from "../Buttons/Buttons";
 
 export default class ModalContainer extends Component {
   constructor() {
@@ -24,7 +23,7 @@ export default class ModalContainer extends Component {
         value = "#5cb85c";
         break;
       case 1:
-        value = "#FFD700";
+        value = "#337ab7";
         break;
       case 2:
         value = "#d9534f";
@@ -37,7 +36,6 @@ export default class ModalContainer extends Component {
 
   render() {
     const { navigation } = this.props;
-    // console.log(navigation);
     // none is a fallback option, if no param passed
     const navParam = navigation.getParam("selected", "none");
     const navCreate = navigation.getParam("createProgram", false);
@@ -46,7 +44,6 @@ export default class ModalContainer extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <ReturnButton navigation={navigation} />
         <Modal
           navEditData={navEditData}
           navEdit={navEdit}

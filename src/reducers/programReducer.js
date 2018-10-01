@@ -17,7 +17,7 @@ export const inititalState = {
       id: 2,
       title: "Example 2",
       description: "This is the description",
-      difficulty: "#FFD700"
+      difficulty: "#337ab7"
     }
     // {
     //   id: 3,

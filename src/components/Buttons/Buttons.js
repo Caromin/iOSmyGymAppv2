@@ -12,7 +12,6 @@ import {
 } from "../../actions/programActions";
 
 export const CreateButton = ({ navigation }) => {
-  // console.log(navigation);
   return (
     <View style={styles.defaultView}>
       <Button
@@ -63,7 +62,7 @@ class CompleteButton extends Component {
               : this.props.addProgramAction(data);
             navigation.navigate("Programs");
           }}
-          title="Complete"
+          title={navEdit ? "Save Edit" : "Complete"}
         />
       </View>
     );
@@ -92,21 +91,37 @@ export const SaveButton = ({ buttonStatus, saveInputs }) => {
 
 export const ReturnButton = ({ navigation }) => {
   return (
-    <View style={{ width: "30%", marginTop: 25 }}>
-      <Button
-        onPress={() => navigation.goBack()}
-        large={false}
-        buttonStyle={[globalStyles.redButton, { width: "100%" }]}
-        textStyle={{ color: "black" }}
-        title="Back"
-        icon={{
-          name: "arrow-left",
-          type: "feather",
-          color: "black"
-        }}
-        borderRadius={5}
-      />
-    </View>
+    <Button
+      onPress={() => navigation.goBack()}
+      large={false}
+      title={""}
+      buttonStyle={{ padding: 5 }}
+      transparent
+      icon={{
+        name: "ios-arrow-back",
+        type: "ionicon",
+        color: "black",
+        size: 30
+      }}
+    />
+  );
+};
+
+export const InfoButton = () => {
+  return (
+    <Button
+      onPress={() => console.log("nothing right now")}
+      large={false}
+      title={""}
+      buttonStyle={{ padding: 5 }}
+      transparent
+      rightIcon={{
+        name: "information-outline",
+        type: "material-community",
+        color: "black",
+        size: 30
+      }}
+    />
   );
 };
 

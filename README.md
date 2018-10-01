@@ -1,7 +1,6 @@
-Status: In-process...
+Current Status: Creating different workout screen.
 
-Components folder is ignored to hide main codebase.
-Everything is tentative, until final production build.
+Will eventually stop commiting components folder, once more unique code is added.
 
 **Main Screen**
 
@@ -9,4 +8,14 @@ Everything is tentative, until final production build.
 
 **Settings Screen**
 
-![45793924-2c3fdd80-bc62-11e8-8593-cdab467c298b](https://user-images.githubusercontent.com/12276056/46058162-9a374980-c127-11e8-976d-6042df079c23.png)
+![img_0065](https://user-images.githubusercontent.com/12276056/46271589-3fcd2d00-c51b-11e8-9a82-b1cda4b170e8.PNG)
+
+**Programs Screen**
+
+![img_0064](https://user-images.githubusercontent.com/12276056/46271586-3fcd2d00-c51b-11e8-98ad-92fb54a0904a.PNG)
+
+**Modal Screen**
+
+![img_0062](https://user-images.githubusercontent.com/12276056/46271587-3fcd2d00-c51b-11e8-8acd-5a641c10fecc.PNG)
+
+![img_0063](https://user-images.githubusercontent.com/12276056/46271588-3fcd2d00-c51b-11e8-85fd-604192875986.PNG)

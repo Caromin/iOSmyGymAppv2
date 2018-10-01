@@ -3,6 +3,7 @@ import { View, Keyboard, TouchableWithoutFeedback } from "react-native";
 
 import CreateModal from "./CreateModal/CreateModal";
 import HomeModal from "./HomeModal/HomeModal";
+import HeaderModal from "./HeaderModal/HeaderModal";
 
 const Modal = ({
   navEdit,
@@ -21,6 +22,7 @@ const Modal = ({
           marginTop: 20
         }}
       >
+        <HeaderModal navEdit={navEdit} navigation={navigation} />
         {navCreate || navEdit ? (
           <CreateModal
             navEditData={navEditData}
