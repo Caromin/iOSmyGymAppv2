@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import Home from "./Home";
-import styles from "./styles";
 
 class HomeContainer extends Component {
   // can be a static object, used function instead to be about to used objects like navigation

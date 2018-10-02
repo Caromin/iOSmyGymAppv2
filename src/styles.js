@@ -33,6 +33,20 @@ const globalStyles = EStyleSheet.create({
   },
   yellowBackground: {
     backgroundColor: "$defaultGold"
+  },
+  defaultScrollView: {
+    height: "80%",
+    paddingTop: 10
+  },
+  defaultEmptyPage: {
+    flex: 1,
+    alignSelf: "center",
+    justifyContent: "center"
+  },
+  defaultListItem: {
+    fontSize: 12,
+    fontWeight: "200",
+    letterSpacing: 0.5
   }
 });
 

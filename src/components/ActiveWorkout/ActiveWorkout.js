@@ -3,7 +3,7 @@ import { View, ScrollView, Text } from "react-native";
 import { ListItem } from "react-native-elements";
 import Swipeout from "react-native-swipeout";
 
-import styles from "./styles";
+import globalStyles from "../../styles";
 
 const ActiveWorkout = ({
   navId,
@@ -53,10 +53,9 @@ const ActiveWorkout = ({
         avatarContainerStyle={{ backgroundColor: obj.difficulty }}
         title={obj.title}
         subtitle={obj.description}
-        subtitleStyle={{ fontSize: 12, fontWeight: "200", letterSpacing: 0.5 }}
+        subtitleStyle={globalStyles.defaultListItem}
         onPress={() => {
-          console.log(obj.id);
-          // navigation.navigate("ActiveWorkouts", { id: obj.id });
+          navigation.navigate("SelectedWorkout", { id: obj.id });
         }}
       />
     </Swipeout>
@@ -66,10 +65,10 @@ const ActiveWorkout = ({
     alwaysBounceVertical: false
   };
   return (
-    <View style={{ height: "80%", paddingTop: 10 }}>
+    <View style={globalStyles.defaultScrollView}>
       {workoutListArr.length === 0 ? (
-        <View style={styles.emptyPageText}>
-          <Text style={{ fontSize: 24 }}>Add a workout!</Text>
+        <View style={globalStyles.defaultEmptyPage}>
+          <Text>Add a workout!</Text>
         </View>
       ) : (
         <ScrollView {...scrollProps}>{postWorkout}</ScrollView>

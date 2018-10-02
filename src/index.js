@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import EStyleSheet from "react-native-extended-stylesheet";
 import {
   createStackNavigator,
   createBottomTabNavigator
@@ -14,6 +13,7 @@ import SettingsContainer from "./components/Settings/SettingsContainer";
 import ModalContainer from "./components/Modal/ModalContainer";
 import ApiKeys from "./apiKeys/ApiKeys";
 import ActiveWorkoutContainer from "./components/ActiveWorkout/ActiveWorkoutContainer";
+import SelectedWorkoutContainer from "./components/SelectedWorkout/SelectedWorkoutContainer";
 
 const options = {
   navigationOptions: {
@@ -27,33 +27,6 @@ const options = {
   }
 };
 
-export const globalStyles = EStyleSheet.create({
-  defaultText: {
-    textAlign: "justify",
-    fontSize: 16,
-    color: "black",
-    paddingLeft: 10,
-    fontWeight: "500"
-  },
-  redBg: {
-    backgroundColor: "red"
-  },
-  verticalMargins: {
-    marginTop: 10,
-    marginBottom: 10
-  },
-  redButton: {
-    backgroundColor: "red"
-  },
-  greenButton: {
-    backgroundColor: "green"
-  },
-
-  blueButton: {
-    backgroundColor: "blue"
-  }
-});
-
 // seperate stack of 'cards' for each of the tab navigator
 const HomeStack = createStackNavigator(
   {
@@ -64,6 +37,7 @@ const HomeStack = createStackNavigator(
 
 const ProgramStack = createStackNavigator(
   {
+    SelectedWorkout: SelectedWorkoutContainer,
     Programs: ProgramContainer,
     ActiveWorkouts: ActiveWorkoutContainer
   },

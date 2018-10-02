@@ -1,8 +1,7 @@
 import React from "react";
 import { Text, View, Image, TouchableHighlight } from "react-native";
 
-import styles from "./styles";
-import { globalStyles } from "../../index";
+import globalStyles from "../../styles";
 
 // if stateless function pass props via object brackets {} to access
 const Home = ({

@@ -15,7 +15,7 @@ import {
 
 export const CreateProgram = ({ navigation }) => {
   return (
-    <View style={styles.defaultView}>
+    <View style={styles.defaultButtonBot}>
       <Button
         large
         buttonStyle={globalStyles.blueBackground}
@@ -34,7 +34,7 @@ export const CreateProgram = ({ navigation }) => {
 
 export const CreateWorkout = ({ navigation, navId }) => {
   return (
-    <View style={styles.defaultView}>
+    <View style={styles.defaultButtonBot}>
       <Button
         large
         buttonStyle={globalStyles.blueBackground}
@@ -85,7 +85,7 @@ class CompleteProgramButton extends Component {
       workouts: []
     };
     return (
-      <View style={styles.defaultView}>
+      <View style={styles.defaultButtonBot}>
         <Button
           large
           buttonStyle={globalStyles.greenBackground}
@@ -114,7 +114,7 @@ class CompleteProgramButton extends Component {
 
 export const SaveButton = ({ buttonStatus, saveInputsFunc }) => {
   return (
-    <View style={styles.defaultView}>
+    <View style={styles.defaultButtonBot}>
       <Button
         large
         buttonStyle={globalStyles.redBackground}

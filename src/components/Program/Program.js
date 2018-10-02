@@ -3,7 +3,7 @@ import { View, Alert, ScrollView } from "react-native";
 import { List, ListItem } from "react-native-elements";
 import Swipeout from "react-native-swipeout";
 
-import styles from "./styles";
+import globalStyles from "../../styles";
 
 const Program = ({ programList, removeProgramAction, navigation }) => {
   // each object is a new button style
@@ -48,9 +48,8 @@ const Program = ({ programList, removeProgramAction, navigation }) => {
         avatarContainerStyle={{ backgroundColor: obj.difficulty }}
         title={obj.title}
         subtitle={obj.description}
-        subtitleStyle={styles.ListItem}
+        subtitleStyle={globalStyles.defaultListItem}
         onPress={() => {
-          console.log("inside programs id: ", obj.id);
           navigation.navigate("ActiveWorkouts", { id: obj.id });
         }}
       />
@@ -58,7 +57,7 @@ const Program = ({ programList, removeProgramAction, navigation }) => {
   ));
 
   return (
-    <View style={styles.ScrollView}>
+    <View style={globalStyles.defaultScrollView}>
       <ScrollView alwaysBounceVertical={false}>
         <List>{postItems}</List>
       </ScrollView>
