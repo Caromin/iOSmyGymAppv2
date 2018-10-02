@@ -1,31 +1,16 @@
-export const DISTANCE_SETTINGS = "DISTANCE_SETTINGS";
-export const WEIGHT_SETTINGS = "WEIGHT_SETTINGS";
 export const ALLINPUT_SETTINGS = "ALLINPUT_SETTINGS";
+export const LOCAL_SETTINGS = "LOCAL_SETTINGS";
 
-// settings button lists
-export const settingsAction = (buttonGroupName, actionId) => dispatch => {
-  switch (buttonGroupName) {
-    case "distance":
-      dispatch({
-        type: DISTANCE_SETTINGS,
-        payload: actionId
-      });
-      break;
-    case "weight":
-      dispatch({
-        type: WEIGHT_SETTINGS,
-        payload: actionId
-      });
-      break;
-    default:
-      alert("There was an error somewhere");
-  }
-};
-
-// settings input options weight/calories
-export const settingsInputs = data => dispatch => {
+export const settingsAction = data => dispatch => {
   dispatch({
     type: ALLINPUT_SETTINGS,
+    payload: data
+  });
+};
+
+export const localSettingsAction = data => dispatch => {
+  dispatch({
+    type: LOCAL_SETTINGS,
     payload: data
   });
 };

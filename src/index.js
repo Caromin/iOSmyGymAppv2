@@ -13,22 +13,7 @@ import ProgramContainer from "./components/Program/ProgramContainer";
 import SettingsContainer from "./components/Settings/SettingsContainer";
 import ModalContainer from "./components/Modal/ModalContainer";
 import ApiKeys from "./apiKeys/ApiKeys";
-
-// cannot create premade objects, only variables
-EStyleSheet.build({
-  // always call EStyleSheet.build() even if you don't use global variables!
-  $defaultTextColor: "#000",
-  // green
-  $successTextColor: "#5cb85c",
-  // red
-  $dangerTextColor: "#d9534f",
-  // blue
-  $primaryTextColor: "#337ab7",
-  // gold
-  $verySuccessTextColor: "#FFD700"
-
-  // $outline: 1
-});
+import ActiveWorkoutContainer from "./components/ActiveWorkout/ActiveWorkoutContainer";
 
 const options = {
   navigationOptions: {
@@ -46,26 +31,26 @@ export const globalStyles = EStyleSheet.create({
   defaultText: {
     textAlign: "justify",
     fontSize: 16,
-    color: "$defaultTextColor",
+    color: "black",
     paddingLeft: 10,
     fontWeight: "500"
   },
   redBg: {
-    backgroundColor: "$dangerTextColor"
+    backgroundColor: "red"
   },
   verticalMargins: {
     marginTop: 10,
     marginBottom: 10
   },
   redButton: {
-    backgroundColor: "$dangerTextColor"
+    backgroundColor: "red"
   },
   greenButton: {
-    backgroundColor: "$successTextColor"
+    backgroundColor: "green"
   },
 
   blueButton: {
-    backgroundColor: "$primaryTextColor"
+    backgroundColor: "blue"
   }
 });
 
@@ -79,7 +64,8 @@ const HomeStack = createStackNavigator(
 
 const ProgramStack = createStackNavigator(
   {
-    Programs: ProgramContainer
+    Programs: ProgramContainer,
+    ActiveWorkouts: ActiveWorkoutContainer
   },
   options
 );

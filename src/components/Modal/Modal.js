@@ -10,7 +10,7 @@ const Modal = ({
   navParam,
   navCreate,
   status,
-  update,
+  updateStateFunc,
   navigation,
   navEditData
 }) => {
@@ -29,7 +29,7 @@ const Modal = ({
             navEdit={navEdit}
             navigation={navigation}
             status={status}
-            update={update}
+            updateStateFunc={updateStateFunc}
           />
         ) : (
           <HomeModal navParam={navParam} />

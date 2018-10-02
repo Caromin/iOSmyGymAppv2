@@ -3,10 +3,17 @@ import { View } from "react-native";
 import { FormLabel, FormInput, ButtonGroup } from "react-native-elements";
 
 import CompleteButton from "../../Buttons/Buttons";
-import { globalStyles } from "../../../index";
+import globalStyles from "../../../styles";
 
-const CreateModal = ({ navEdit, status, navigation, update, navEditData }) => {
+const CreateModal = ({
+  navEdit,
+  status,
+  navigation,
+  updateStateFunc,
+  navEditData
+}) => {
   const difficultyButtons = ["EASY", "MEDIUM", "HARD"];
+  const color = status.difficultyId;
 
   return (
     <View style={{ flex: 1 }}>
@@ -15,7 +22,7 @@ const CreateModal = ({ navEdit, status, navigation, update, navEditData }) => {
         placeholder={navEdit ? navEditData.title : "Shoulders Only"}
         onChangeText={value => {
           const id = "programTitle";
-          update(id, value);
+          updateStateFunc(id, value);
         }}
       />
       <FormLabel>Description:</FormLabel>
@@ -25,21 +32,25 @@ const CreateModal = ({ navEdit, status, navigation, update, navEditData }) => {
         }
         onChangeText={value => {
           const id = "programDescription";
-          update(id, value);
+          updateStateFunc(id, value);
         }}
       />
       <FormLabel>Difficulty:</FormLabel>
       <View style={{ paddingTop: 10 }}>
         <ButtonGroup
           buttons={difficultyButtons}
-          // this is to show which index is active
           selectedIndex={status.difficultyId}
-          onPress={indexNumber => {
-            let actionParam = "difficulty";
-            let actionId = indexNumber;
-            update(actionParam, actionId);
+          onPress={index => {
+            let id = "difficulty";
+            updateStateFunc(id, index);
           }}
-          selectedButtonStyle={globalStyles.redBg}
+          selectedButtonStyle={
+            color === 0
+              ? globalStyles.greenBackground
+              : color === 1
+                ? globalStyles.yellowBackground
+                : globalStyles.redBackground
+          }
         />
       </View>
       <CompleteButton

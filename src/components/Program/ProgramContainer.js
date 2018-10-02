@@ -23,9 +23,8 @@ class ProgramContainer extends Component {
     this.state = {
       db: firebase.firestore()
     };
-    this.addToDatabase = this.addToDatabase.bind(this);
-    this.setStorage = this.setStorage.bind(this);
-    this.getStorage = this.getStorage.bind(this);
+    this.setStorageProgram = this.setStorageProgram.bind(this);
+    this.getStorageProgram = this.getStorageProgram.bind(this);
   }
 
   componentWillMount = () => {
@@ -33,40 +32,25 @@ class ProgramContainer extends Component {
       timestampsInSnapshots: true
     });
 
-    // Use setStorage if you clear the current async storage.
     // AsyncStorage.clear();
-    // this.setStorage();
-    this.getStorage();
+    this.getStorageProgram();
   };
 
   componentDidUpdate() {
-    this.setStorage();
+    this.setStorageProgram();
   }
 
-  setStorage = async () => {
+  setStorageProgram = async () => {
     const parsedList = JSON.stringify(this.props.programList);
     await AsyncStorage.setItem("list", parsedList);
   };
 
-  getStorage = async () => {
-    username = await AsyncStorage.getItem("list").then(value => {
+  getStorageProgram = async () => {
+    await AsyncStorage.getItem("list").then(value => {
       const completedList = JSON.parse(value);
       this.props.getLocalAction(completedList);
     });
   };
-
-  addToDatabase(bodyPart, data) {
-    this.state.db
-      .collection(bodyPart)
-      .add({
-        name: data.name,
-        difficulty: data.difficulty,
-        reminder: data.reminder
-      })
-      .then(function(docRef) {
-        console.log("Document written with ID: ", docRef.id);
-      });
-  }
 
   render() {
     const { navigation, programList, removeProgramAction } = this.props;
@@ -75,7 +59,7 @@ class ProgramContainer extends Component {
       <View style={{ flex: 1 }}>
         <Program
           programList={programList}
-          removeList={removeProgramAction}
+          removeProgramAction={removeProgramAction}
           navigation={navigation}
         />
         <CreateButton navigation={navigation} />

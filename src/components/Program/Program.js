@@ -3,7 +3,9 @@ import { View, Alert, ScrollView } from "react-native";
 import { List, ListItem } from "react-native-elements";
 import Swipeout from "react-native-swipeout";
 
-const Program = ({ programList, removeList, navigation }) => {
+import styles from "./styles";
+
+const Program = ({ programList, removeProgramAction, navigation }) => {
   // each object is a new button style
   const swipeoutBtns = obj => {
     return [
@@ -30,7 +32,7 @@ const Program = ({ programList, removeList, navigation }) => {
             },
             {
               text: "Delete",
-              onPress: () => removeList(obj.id)
+              onPress: () => removeProgramAction(obj.id)
             }
           ]);
         }
@@ -46,20 +48,17 @@ const Program = ({ programList, removeList, navigation }) => {
         avatarContainerStyle={{ backgroundColor: obj.difficulty }}
         title={obj.title}
         subtitle={obj.description}
-        subtitleStyle={{ fontSize: 12, fontWeight: "200", letterSpacing: 0.5 }}
+        subtitleStyle={styles.ListItem}
         onPress={() => {
-          console.log(obj.id);
+          navigation.navigate("ActiveWorkouts", { id: obj.id });
         }}
       />
     </Swipeout>
   ));
 
-  const scrollProps = {
-    alwaysBounceVertical: false
-  };
   return (
-    <View style={{ height: "80%", paddingTop: 10 }}>
-      <ScrollView {...scrollProps}>
+    <View style={styles.ScrollView}>
+      <ScrollView alwaysBounceVertical={false}>
         <List>{postItems}</List>
       </ScrollView>
     </View>

@@ -13,17 +13,17 @@ export default class ModalContainer extends Component {
       difficulty: "",
       difficultyId: null
     };
-    this.updateState = this.updateState.bind(this);
+    this.updateStateFunc = this.updateStateFunc.bind(this);
   }
 
-  updateState(statusId, value) {
-    statusId === "difficulty" ? this.setState({ difficultyId: value }) : null;
+  updateStateFunc(id, value) {
+    id === "difficulty" ? this.setState({ difficultyId: value }) : null;
     switch (value) {
       case 0:
         value = "#5cb85c";
         break;
       case 1:
-        value = "#337ab7";
+        value = "#FFDF00";
         break;
       case 2:
         value = "#d9534f";
@@ -31,15 +31,18 @@ export default class ModalContainer extends Component {
       default:
         break;
     }
-    this.setState({ [statusId]: value });
+    this.setState({ [id]: value });
   }
 
   render() {
     const { navigation } = this.props;
-    // none is a fallback option, if no param passed
+    // from home screen
     const navParam = navigation.getParam("selected", "none");
+    // from create new program
     const navCreate = navigation.getParam("createProgram", false);
+    // from editng program w/ object selected
     const navEdit = navigation.getParam("editing", false);
+    // if editing this is the data
     const navEditData = navigation.getParam("currentObj", null);
 
     return (
@@ -50,7 +53,7 @@ export default class ModalContainer extends Component {
           navParam={navParam}
           navCreate={navCreate}
           status={this.state}
-          update={this.updateState}
+          updateStateFunc={this.updateStateFunc}
           navigation={navigation}
         />
       </View>

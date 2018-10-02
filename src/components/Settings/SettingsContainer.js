@@ -1,99 +1,136 @@
 import React, { Component } from "react";
 import { View } from "react-native";
 import { connect } from "react-redux";
-import * as firebase from "firebase";
 import { withNavigationFocus } from "react-navigation";
 import PropTypes from "prop-types";
+import { AsyncStorage } from "react-native";
 
 import Settings from "./Settings";
 // remember to use this.props
-import { settingsAction, settingsInputs } from "../../actions/settingsAction";
+import {
+  settingsAction,
+  localSettingsAction
+} from "../../actions/settingsAction";
 
 class SettingsContainer extends Component {
-  constructor() {
-    super();
+  static navigationOptions = {
+    title: "Settings"
+  };
+  constructor(props) {
+    super(props);
     this.state = {
-      wasEdited: false,
-      weight: 0,
-      calories: 0,
+      isEdited: false,
+      weight: this.props.personalWeight,
+      calories: this.props.caloriesBurned,
       successAlert: false,
-      errorAlert: {
+      errorStatus: {
         weightCount: false,
         caloriesCount: false
       },
       activeButtons: {
-        distance: 0,
-        weight: 0
+        distanceBtn: this.props.distanceBtn,
+        weightBtn: this.props.weightBtn
       }
     };
-    this.updateAlert = this.updateAlert.bind(this);
-    this.updateActive = this.updateActive.bind(this);
-    this.updateInputs = this.updateInputs.bind(this);
-    this.saveInputs = this.saveInputs.bind(this);
+    this.updateErrMsgFunc = this.updateErrMsgFunc.bind(this);
+    this.saveInputsFunc = this.saveInputsFunc.bind(this);
+    this.updateSettingsFunc = this.updateSettingsFunc.bind(this);
+    this.setStorageSettingFunc = this.setStorageSettingFunc.bind(this);
+    this.getStorageSettingFunc = this.getStorageSettingFunc.bind(this);
   }
 
-  static navigationOptions = {
-    title: "Settings"
-  };
+  componentWillMount() {
+    this.getStorageSettingFunc();
+  }
 
   componentWillUpdate() {
     this.props.isFocused ? null : this.setState({ successAlert: false });
   }
 
-  updateAlert = (status, id) => {
-    let selectedState = `${status}` + "Count";
-    if (id) {
-      this.setState({
-        errorAlert: { ...this.state.errorAlert, [selectedState]: id }
-      });
-    } else {
-      this.setState({
-        errorAlert: { ...this.state.errorAlert, [selectedState]: id }
-      });
-    }
+  setStorageSettingFunc = async () => {
+    const parsedList = JSON.stringify(this.props.settingList);
+    await AsyncStorage.setItem("settings", parsedList);
   };
 
-  updateActive = (indexNumber, buttonGroupName, actionId) => {
-    this.props.settingsAction(buttonGroupName, actionId);
-    // use brackets [] to access passed variables that are not inside state in the key
-    this.setState({
-      activeButtons: {
-        ...this.state.activeButtons,
-        [buttonGroupName]: indexNumber
-      }
+  getStorageSettingFunc = async () => {
+    await AsyncStorage.getItem("settings").then(value => {
+      const completedList = JSON.parse(value);
+      this.props.localSettingsAction(completedList);
+      // must be used because this.state is loading before I can update the redux via mount
+      this.setState({ weight: completedList.weight });
+      this.setState({ calories: completedList.caloriesBurned });
+      this.setState({
+        activeButtons: {
+          ...this.state.activeButtons,
+          distanceBtn: completedList.distanceBtn
+        }
+      });
+      this.setState({
+        activeButtons: {
+          ...this.state.activeButtons,
+          weightBtn: completedList.weightBtn
+        }
+      });
     });
   };
 
-  updateInputs = (input, id) => {
-    this.setState({ wasEdited: true });
-    this.setState({ [id]: input });
-    this.setState({ successAlert: false });
-  };
-
-  saveInputs = () => {
-    this.setState({ wasEdited: false });
+  saveInputsFunc = async () => {
+    this.setState({ isEdited: false });
     this.setState({ successAlert: true });
     let data = {
-      weight: this.state.weight,
-      calories: this.state.calories
+      weight:
+        this.state.weight === NaN
+          ? this.props.personalWeight
+          : this.state.weight,
+      caloriesBurned:
+        this.state.calories === NaN
+          ? this.props.caloriesBurned
+          : this.state.calories,
+      distanceBtn: this.state.activeButtons.distanceBtn,
+      weightBtn: this.state.activeButtons.weightBtn
     };
-    this.props.settingsInputs(data);
+    await this.props.settingsAction(data);
+    await this.setStorageSettingFunc();
+  };
+
+  updateErrMsgFunc = (status, ifActive) => {
+    let selectedState = `${status}` + "Count";
+    ifActive
+      ? this.setState({
+          errorStatus: {
+            ...this.state.errorStatus,
+            [selectedState]: ifActive
+          }
+        })
+      : this.setState({
+          errorStatus: {
+            ...this.state.errorStatus,
+            [selectedState]: ifActive
+          }
+        });
+  };
+
+  updateSettingsFunc = (id, value, btnOnlyId) => {
+    this.setState({ isEdited: true });
+    this.setState({ successAlert: false });
+    btnOnlyId
+      ? this.setState({
+          activeButtons: {
+            ...this.state.activeButtons,
+            [id]: value
+          }
+        })
+      : this.setState({ [id]: !value ? 0 : value });
   };
 
   render() {
-    // use if creating a navigation new screen button
-    const { navigation, personalWeight, caloriesBurned } = this.props;
-
     return (
       <View style={{ flex: 1 }}>
         <Settings
-          updateActive={this.updateActive}
-          updateInputs={this.updateInputs}
-          updateAlert={this.updateAlert}
-          saveInputs={this.saveInputs}
+          updateSettingsFunc={this.updateSettingsFunc}
+          updateErrMsgFunc={this.updateErrMsgFunc}
+          saveInputsFunc={this.saveInputsFunc}
           status={this.state}
-          personalWeight={personalWeight}
-          caloriesBurned={caloriesBurned}
         />
       </View>
     );
@@ -102,15 +139,20 @@ class SettingsContainer extends Component {
 
 SettingsContainer.propTypes = {
   personalWeight: PropTypes.number,
-  caloriesBurned: PropTypes.number
+  caloriesBurned: PropTypes.number,
+  distanceBtn: PropTypes.number,
+  weightBtn: PropTypes.number
 };
 
 const mapStateToProps = state => ({
+  settingList: state.settingsReducer.profile,
   personalWeight: state.settingsReducer.profile.weight,
-  caloriesBurned: state.settingsReducer.profile.caloriesBurned
+  caloriesBurned: state.settingsReducer.profile.caloriesBurned,
+  distanceBtn: state.settingsReducer.profile.distanceBtn,
+  weightBtn: state.settingsReducer.profile.weightBtn
 });
 
 export default connect(
   mapStateToProps,
-  { settingsAction, settingsInputs }
+  { settingsAction, localSettingsAction }
 )(withNavigationFocus(SettingsContainer));

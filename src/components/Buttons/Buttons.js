@@ -4,7 +4,7 @@ import { Button } from "react-native-elements";
 import { connect } from "react-redux";
 import uuidv1 from "uuid/v1";
 
-import { globalStyles } from "../../index";
+import globalStyles from "../../styles";
 import styles from "./styles";
 import {
   addProgramAction,
@@ -16,8 +16,8 @@ export const CreateButton = ({ navigation }) => {
     <View style={styles.defaultView}>
       <Button
         large
-        buttonStyle={[globalStyles.blueButton, { width: "100%" }]}
-        textStyle={{ color: "#000" }}
+        buttonStyle={globalStyles.blueBackground}
+        textStyle={globalStyles.defaultTextColor}
         icon={{
           name: "plus-circle",
           type: "feather",
@@ -38,19 +38,27 @@ class CompleteButton extends Component {
     const { navigation, status, navEdit, navEditData } = this.props;
     const data = {
       id: navEdit ? navEditData.id : uuidv1(),
-      title: status.programTitle === "" ? "Title" : status.programTitle,
+      title:
+        status.programTitle === "" && navEdit
+          ? navEditData.title
+          : status.programTitle === ""
+            ? "Empty Title"
+            : status.programTitle,
       description:
-        status.programDescription === ""
-          ? "description"
-          : status.programDescription,
-      difficulty: status.difficulty === "" ? "#dedede" : status.difficulty
+        status.programDescription === "" && navEdit
+          ? navEditData.description
+          : status.programDescription === ""
+            ? "description"
+            : status.programDescription,
+      difficulty: status.difficulty === "" ? "#dedede" : status.difficulty,
+      workouts: []
     };
     return (
       <View style={styles.defaultView}>
         <Button
           large
-          buttonStyle={[globalStyles.greenButton, { width: "100%" }]}
-          textStyle={{ color: "#000" }}
+          buttonStyle={globalStyles.greenBackground}
+          textStyle={globalStyles.defaultTextColor}
           icon={{
             name: "check-circle",
             type: "feather",
@@ -69,20 +77,20 @@ class CompleteButton extends Component {
   }
 }
 
-export const SaveButton = ({ buttonStatus, saveInputs }) => {
+export const SaveButton = ({ buttonStatus, saveInputsFunc }) => {
   return (
     <View style={styles.defaultView}>
       <Button
         large
-        buttonStyle={[globalStyles.redButton, { width: "100%" }]}
-        textStyle={{ color: "black" }}
+        buttonStyle={globalStyles.redBackground}
+        textStyle={globalStyles.defaultTextColor}
         icon={{
           name: "save",
           type: "entypo",
-          color: "black"
+          color: "#000"
         }}
         disabled={buttonStatus}
-        onPress={() => saveInputs()}
+        onPress={() => saveInputsFunc()}
         title="Save"
       />
     </View>
@@ -100,7 +108,7 @@ export const ReturnButton = ({ navigation }) => {
       icon={{
         name: "ios-arrow-back",
         type: "ionicon",
-        color: "black",
+        color: "#000",
         size: 30
       }}
     />
@@ -118,7 +126,7 @@ export const InfoButton = () => {
       rightIcon={{
         name: "information-outline",
         type: "material-community",
-        color: "black",
+        color: "#000",
         size: 30
       }}
     />

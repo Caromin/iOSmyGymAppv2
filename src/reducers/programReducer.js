@@ -11,75 +11,36 @@ export const inititalState = {
       id: 1,
       title: "Example 1",
       description: "This is the description",
-      difficulty: "#d9534f"
+      difficulty: "#d9534f",
+      workouts: [
+        {
+          id: 100,
+          difficulty: "#d9534f",
+          workoutTitle: "Leg Day",
+          workoutDescription: "Do this weekly, please!"
+        }
+      ]
     },
     {
       id: 2,
       title: "Example 2",
-      description: "This is the description",
-      difficulty: "#337ab7"
+      description: "This is the description 2",
+      difficulty: "#FFDF00",
+      workouts: [
+        {
+          id: 101,
+          difficulty: "#d9534f",
+          workoutTitle: "Bi's and tri's",
+          workoutDescription: "Good til next year!"
+        }
+      ]
     }
-    // {
-    //   id: 3,
-    //   title: "Example 1",
-    //   description: "This is the description",
-    //   difficulty: "#d9534f"
-    // },
-    // {
-    //   id: 4,
-    //   title: "Example 2",
-    //   description: "This is the description",
-    //   difficulty: "#FFD700"
-    // },
-    // {
-    //   id: 5,
-    //   title: "Example 1",
-    //   description: "This is the description",
-    //   difficulty: "#d9534f"
-    // },
-    // {
-    //   id: 6,
-    //   title: "Example 2",
-    //   description: "This is the description",
-    //   difficulty: "#FFD700"
-    // },
-    // {
-    //   id: 7,
-    //   title: "Example 1",
-    //   description: "This is the description",
-    //   difficulty: "#d9534f"
-    // },
-    // {
-    //   id: 8,
-    //   title: "Example 2",
-    //   description: "This is the description",
-    //   difficulty: "#FFD700"
-    // },
-    // {
-    //   id: 9,
-    //   title: "Example 1",
-    //   description: "This is the description",
-    //   difficulty: "#d9534f"
-    // },
-    // {
-    //   id: 10,
-    //   title: "Example 2",
-    //   description: "This is the description",
-    //   difficulty: "#FFD700"
-    // },
-    // {
-    //   id: 11,
-    //   title: "Example 2",
-    //   description: "This is the description",
-    //   difficulty: "#FFD700"
-    // }
   ]
 };
 
 export default function(state = inititalState, action) {
   switch (action.type) {
     case GET_LOCAL_ACTION:
-      // console.log(action.payload);
       if (action.payload === null) {
         return { ...state };
       }
@@ -93,6 +54,7 @@ export default function(state = inititalState, action) {
         programList: [...state.programList, action.payload]
       };
     case EDIT_PROGRAM:
+      // want to create a new map and where action.id and index.id meet I want to replace that object with a new object
       const editedArr = state.programList.map(index => {
         if (action.payload.id === index.id) {
           return action.payload;
@@ -106,6 +68,7 @@ export default function(state = inititalState, action) {
       };
     case REMOVE_PROGRAM:
       const arr = state.programList.filter(index => {
+        // gives me all programs without this id
         if (index.id !== action.payload) {
           return index;
         }
