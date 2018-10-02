@@ -1,7 +1,9 @@
 import React from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Text } from "react-native";
 import { ListItem } from "react-native-elements";
 import Swipeout from "react-native-swipeout";
+
+import styles from "./styles";
 
 const ActiveWorkout = ({
   navId,
@@ -49,8 +51,8 @@ const ActiveWorkout = ({
         roundAvatar
         avatar={{}}
         avatarContainerStyle={{ backgroundColor: obj.difficulty }}
-        title={obj.workoutTitle}
-        subtitle={obj.workoutDescription}
+        title={obj.title}
+        subtitle={obj.description}
         subtitleStyle={{ fontSize: 12, fontWeight: "200", letterSpacing: 0.5 }}
         onPress={() => {
           console.log(obj.id);
@@ -59,12 +61,19 @@ const ActiveWorkout = ({
       />
     </Swipeout>
   ));
+
   const scrollProps = {
     alwaysBounceVertical: false
   };
   return (
     <View style={{ height: "80%", paddingTop: 10 }}>
-      <ScrollView {...scrollProps}>{postWorkout}</ScrollView>
+      {workoutListArr.length === 0 ? (
+        <View style={styles.emptyPageText}>
+          <Text style={{ fontSize: 24 }}>Add a workout!</Text>
+        </View>
+      ) : (
+        <ScrollView {...scrollProps}>{postWorkout}</ScrollView>
+      )}
     </View>
   );
 };

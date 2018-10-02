@@ -50,6 +50,7 @@ const Program = ({ programList, removeProgramAction, navigation }) => {
         subtitle={obj.description}
         subtitleStyle={styles.ListItem}
         onPress={() => {
+          console.log("inside programs id: ", obj.id);
           navigation.navigate("ActiveWorkouts", { id: obj.id });
         }}
       />

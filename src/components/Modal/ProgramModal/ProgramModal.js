@@ -2,10 +2,10 @@ import React from "react";
 import { View } from "react-native";
 import { FormLabel, FormInput, ButtonGroup } from "react-native-elements";
 
-import CompleteButton from "../../Buttons/Buttons";
+import CompleteProgramButton from "../../Buttons/Buttons";
 import globalStyles from "../../../styles";
 
-const CreateModal = ({
+const ProgramModal = ({
   navEdit,
   status,
   navigation,
@@ -53,7 +53,7 @@ const CreateModal = ({
           }
         />
       </View>
-      <CompleteButton
+      <CompleteProgramButton
         navEdit={navEdit}
         navEditData={navEditData}
         navigation={navigation}
@@ -63,4 +63,4 @@ const CreateModal = ({
   );
 };
 
-export default CreateModal;
+export default ProgramModal;

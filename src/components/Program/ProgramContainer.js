@@ -11,7 +11,7 @@ import {
   getLocalAction,
   removeProgramAction
 } from "../../actions/programActions";
-import { CreateButton } from "../Buttons/Buttons";
+import { CreateProgram } from "../Buttons/Buttons";
 
 class ProgramContainer extends Component {
   static navigationOptions = {
@@ -48,6 +48,7 @@ class ProgramContainer extends Component {
   getStorageProgram = async () => {
     await AsyncStorage.getItem("list").then(value => {
       const completedList = JSON.parse(value);
+      console.log(completedList);
       this.props.getLocalAction(completedList);
     });
   };
@@ -62,7 +63,7 @@ class ProgramContainer extends Component {
           removeProgramAction={removeProgramAction}
           navigation={navigation}
         />
-        <CreateButton navigation={navigation} />
+        <CreateProgram navigation={navigation} />
       </View>
     );
   }

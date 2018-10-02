@@ -38,12 +38,15 @@ export default class ModalContainer extends Component {
     const { navigation } = this.props;
     // from home screen
     const navParam = navigation.getParam("selected", "none");
-    // from create new program
+    // from create new PROGRAM
     const navCreate = navigation.getParam("createProgram", false);
     // from editng program w/ object selected
     const navEdit = navigation.getParam("editing", false);
     // if editing this is the data
     const navEditData = navigation.getParam("currentObj", null);
+    // from create new WORKOUT
+    const navWorkout = navigation.getParam("createWorkout", false);
+    const navWorkoutId = navigation.getParam("navId", null);
 
     return (
       <View style={{ flex: 1 }}>
@@ -55,6 +58,8 @@ export default class ModalContainer extends Component {
           status={this.state}
           updateStateFunc={this.updateStateFunc}
           navigation={navigation}
+          navWorkout={navWorkout}
+          navWorkoutId={navWorkoutId}
         />
       </View>
     );

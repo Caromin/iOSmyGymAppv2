@@ -2,7 +2,8 @@ import {
   ADD_NEW_PROGRAM,
   GET_LOCAL_ACTION,
   REMOVE_PROGRAM,
-  EDIT_PROGRAM
+  EDIT_PROGRAM,
+  ADD_NEW_WORKOUT
 } from "../actions/programActions";
 
 export const inititalState = {
@@ -77,7 +78,21 @@ export default function(state = inititalState, action) {
         ...state,
         programList: arr
       };
-
+    case ADD_NEW_WORKOUT:
+      const arrWorkout = state.programList.filter(index => {
+        if (index.id === action.programId) {
+          let workouts = index.workouts;
+          workouts.push(action.payload);
+          return index;
+        } else {
+          return index;
+        }
+      });
+      // console.log(arrWorkout);
+      return {
+        ...state,
+        programList: arrWorkout
+      };
     default:
       return state;
   }

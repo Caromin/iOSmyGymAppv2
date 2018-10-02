@@ -3,7 +3,7 @@ import { View } from "react-native";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
-import { CreateButton } from "../Buttons/Buttons";
+import { CreateWorkout } from "../Buttons/Buttons";
 import { removeWorkoutAction } from "../../actions/programActions";
 import ActiveWorkout from "./ActiveWorkout";
 
@@ -27,7 +27,7 @@ class ActiveWorkoutContainer extends Component {
           navId={navId}
           removeWorkoutAction={removeWorkoutAction}
         />
-        <CreateButton navigation={navigation} />
+        <CreateWorkout navId={navId} navigation={navigation} />
       </View>
     );
   }

@@ -1,9 +1,10 @@
 import React from "react";
 import { View, Keyboard, TouchableWithoutFeedback } from "react-native";
 
-import CreateModal from "./CreateModal/CreateModal";
+import ProgramModal from "./ProgramModal/ProgramModal";
 import HomeModal from "./HomeModal/HomeModal";
 import HeaderModal from "./HeaderModal/HeaderModal";
+import WorkoutModal from "./WorkoutModal/WorkoutModal";
 
 const Modal = ({
   navEdit,
@@ -12,7 +13,9 @@ const Modal = ({
   status,
   updateStateFunc,
   navigation,
-  navEditData
+  navEditData,
+  navWorkout,
+  navWorkoutId
 }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -22,9 +25,23 @@ const Modal = ({
           marginTop: 20
         }}
       >
-        <HeaderModal navEdit={navEdit} navigation={navigation} />
+        <HeaderModal
+          navEdit={navEdit}
+          navigation={navigation}
+          navWorkout={navWorkout}
+        />
         {navCreate || navEdit ? (
-          <CreateModal
+          <ProgramModal
+            navEditData={navEditData}
+            navEdit={navEdit}
+            navigation={navigation}
+            status={status}
+            updateStateFunc={updateStateFunc}
+          />
+        ) : navWorkout ? (
+          <WorkoutModal
+            navWorkoutId={navWorkoutId}
+            navWorkout={navWorkout}
             navEditData={navEditData}
             navEdit={navEdit}
             navigation={navigation}

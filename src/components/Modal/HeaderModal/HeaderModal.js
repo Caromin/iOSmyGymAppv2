@@ -2,8 +2,12 @@ import React from "react";
 import { Header } from "react-native-elements";
 import { ReturnButton, InfoButton } from "../../Buttons/Buttons";
 
-const HeaderModal = ({ navigation, navEdit }) => {
-  const passedTitle = navEdit ? "EDIT" : "CREATE";
+const HeaderModal = ({ navigation, navEdit, navWorkout }) => {
+  const passedTitle = navEdit
+    ? "EDIT PROGRAM"
+    : navWorkout
+      ? "CREATE WORKOUT"
+      : "CREATE PROGRAM";
   return (
     <Header
       backgroundColor={"#337ab7"}
@@ -12,9 +16,10 @@ const HeaderModal = ({ navigation, navEdit }) => {
         text: passedTitle,
         style: {
           color: "#000",
-          fontSize: 20,
+          fontSize: 18,
           paddingLeft: 14,
-          height: "80%"
+          height: "80%",
+          fontWeight: "600"
         }
       }}
       rightComponent={<InfoButton />}

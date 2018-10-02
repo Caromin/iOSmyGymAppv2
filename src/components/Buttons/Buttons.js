@@ -8,10 +8,11 @@ import globalStyles from "../../styles";
 import styles from "./styles";
 import {
   addProgramAction,
-  editProgramAction
+  editProgramAction,
+  addWorkoutAction
 } from "../../actions/programActions";
 
-export const CreateButton = ({ navigation }) => {
+export const CreateProgram = ({ navigation }) => {
   return (
     <View style={styles.defaultView}>
       <Button
@@ -30,12 +31,41 @@ export const CreateButton = ({ navigation }) => {
   );
 };
 
-class CompleteButton extends Component {
+export const CreateWorkout = ({ navigation, navId }) => {
+  return (
+    <View style={styles.defaultView}>
+      <Button
+        large
+        buttonStyle={globalStyles.blueBackground}
+        textStyle={globalStyles.defaultTextColor}
+        icon={{
+          name: "dumbbell",
+          type: "material-community",
+          color: "black"
+        }}
+        onPress={() =>
+          navigation.navigate("Modal", { createWorkout: true, navId: navId })
+        }
+        title="Add Workout"
+      />
+    </View>
+  );
+};
+
+class CompleteProgramButton extends Component {
   constructor(props) {
     super(props);
   }
   render() {
-    const { navigation, status, navEdit, navEditData } = this.props;
+    const {
+      navigation,
+      status,
+      navEdit,
+      navEditData,
+      navWorkout,
+      navWorkoutId
+    } = this.props;
+    const arrName = navWorkout ? "allExercises" : "workouts";
     const data = {
       id: navEdit ? navEditData.id : uuidv1(),
       title:
@@ -51,7 +81,7 @@ class CompleteButton extends Component {
             ? "description"
             : status.programDescription,
       difficulty: status.difficulty === "" ? "#dedede" : status.difficulty,
-      workouts: []
+      [arrName]: []
     };
     return (
       <View style={styles.defaultView}>
@@ -67,8 +97,10 @@ class CompleteButton extends Component {
           onPress={() => {
             navEdit
               ? this.props.editProgramAction(data)
-              : this.props.addProgramAction(data);
-            navigation.navigate("Programs");
+              : navWorkout
+                ? this.props.addWorkoutAction(data, navWorkoutId)
+                : this.props.addProgramAction(data);
+            navigation.goBack();
           }}
           title={navEdit ? "Save Edit" : "Complete"}
         />
@@ -135,5 +167,5 @@ export const InfoButton = () => {
 
 export default connect(
   null,
-  { addProgramAction, editProgramAction }
-)(CompleteButton);
+  { addProgramAction, editProgramAction, addWorkoutAction }
+)(CompleteProgramButton);
