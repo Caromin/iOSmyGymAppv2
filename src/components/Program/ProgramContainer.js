@@ -48,7 +48,7 @@ class ProgramContainer extends Component {
   getStorageProgram = async () => {
     await AsyncStorage.getItem("list").then(value => {
       const completedList = JSON.parse(value);
-      console.log(completedList);
+      // console.log(completedList);
       this.props.getLocalAction(completedList);
     });
   };

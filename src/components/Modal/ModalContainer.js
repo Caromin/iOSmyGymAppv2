@@ -47,7 +47,8 @@ export default class ModalContainer extends Component {
     // from create new WORKOUT
     const navWorkout = navigation.getParam("createWorkout", false);
     const navWorkoutId = navigation.getParam("navId", null);
-
+    // from create edit WORKOUT
+    const navWorkoutEdit = navigation.getParam("workoutEditing", false);
     return (
       <View style={{ flex: 1 }}>
         <Modal
@@ -60,6 +61,7 @@ export default class ModalContainer extends Component {
           navigation={navigation}
           navWorkout={navWorkout}
           navWorkoutId={navWorkoutId}
+          navWorkoutEdit={navWorkoutEdit}
         />
       </View>
     );

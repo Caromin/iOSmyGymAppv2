@@ -20,10 +20,10 @@ const ActiveWorkout = ({
         color: "#000",
         underlayColor: "rgba(51, 122, 183, 0.8)",
         onPress: () => {
-          console.log(obj);
           navigation.navigate("Modal", {
-            editingWorkingout: true,
-            workoutObj: obj
+            workoutEditing: true,
+            currentObj: obj,
+            createWorkout: true
           });
         }
       },

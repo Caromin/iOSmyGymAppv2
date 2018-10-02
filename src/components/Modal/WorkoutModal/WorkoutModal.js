@@ -6,13 +6,13 @@ import CompleteProgramButton from "../../Buttons/Buttons";
 import globalStyles from "../../../styles";
 
 const WorkoutModal = ({
-  navEdit,
   status,
   navigation,
   updateStateFunc,
   navEditData,
   navWorkout,
-  navWorkoutId
+  navWorkoutId,
+  navWorkoutEdit
 }) => {
   const difficultyButtons = ["EASY", "MEDIUM", "HARD"];
   const color = status.difficultyId;
@@ -21,7 +21,7 @@ const WorkoutModal = ({
     <View style={{ flex: 1 }}>
       <FormLabel>Workout Name:</FormLabel>
       <FormInput
-        placeholder={navEdit ? navEditData.title : "Back and Bi"}
+        placeholder={navWorkoutEdit ? navEditData.title : "Back and Bi"}
         onChangeText={value => {
           const id = "programTitle";
           updateStateFunc(id, value);
@@ -29,7 +29,7 @@ const WorkoutModal = ({
       />
       <FormLabel>Description:</FormLabel>
       <FormInput
-        placeholder={navEdit ? navEditData.description : "Tuesday only"}
+        placeholder={navWorkoutEdit ? navEditData.description : "Tuesday only"}
         onChangeText={value => {
           const id = "programDescription";
           updateStateFunc(id, value);
@@ -55,8 +55,7 @@ const WorkoutModal = ({
       </View>
       <CompleteProgramButton
         navWorkout={navWorkout}
-        navWorkout={navWorkout}
-        navEdit={navEdit}
+        navWorkoutEdit={navWorkoutEdit}
         navEditData={navEditData}
         navigation={navigation}
         status={status}

@@ -3,7 +3,9 @@ import {
   GET_LOCAL_ACTION,
   REMOVE_PROGRAM,
   EDIT_PROGRAM,
-  ADD_NEW_WORKOUT
+  ADD_NEW_WORKOUT,
+  REMOVE_WORKOUT,
+  EDIT_WORKOUT
 } from "../actions/programActions";
 
 export const inititalState = {
@@ -17,8 +19,8 @@ export const inititalState = {
         {
           id: 100,
           difficulty: "#d9534f",
-          workoutTitle: "Leg Day",
-          workoutDescription: "Do this weekly, please!"
+          title: "Leg Day",
+          description: "Do this weekly, please!"
         }
       ]
     },
@@ -31,8 +33,8 @@ export const inititalState = {
         {
           id: 101,
           difficulty: "#d9534f",
-          workoutTitle: "Bi's and tri's",
-          workoutDescription: "Good til next year!"
+          title: "Bi's and tri's",
+          description: "Good til next year!"
         }
       ]
     }
@@ -92,6 +94,41 @@ export default function(state = inititalState, action) {
       return {
         ...state,
         programList: arrWorkout
+      };
+    case REMOVE_WORKOUT:
+      // generate a new programList
+      const removeWorkout = state.programList.map(index => {
+        // filter to remove selected id
+        let newWorkoutArr = index.workouts.filter(index => {
+          if (index.id !== action.payload) {
+            return index;
+          }
+        });
+        // set new array to old array
+        index.workouts = newWorkoutArr;
+        return index;
+      });
+      return {
+        ...state,
+        programList: removeWorkout
+      };
+    case EDIT_WORKOUT:
+      const editWorkout = state.programList.map(index => {
+        // replace selected obj in array with new
+        let newWorkoutArr = index.workouts.map(index => {
+          if (index.id === action.payload.id) {
+            return action.payload;
+          } else {
+            return index;
+          }
+        });
+        // set new array to old array
+        index.workouts = newWorkoutArr;
+        return index;
+      });
+      return {
+        ...state,
+        programList: editWorkout
       };
     default:
       return state;

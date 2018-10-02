@@ -15,7 +15,8 @@ const Modal = ({
   navigation,
   navEditData,
   navWorkout,
-  navWorkoutId
+  navWorkoutId,
+  navWorkoutEdit
 }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -29,6 +30,7 @@ const Modal = ({
           navEdit={navEdit}
           navigation={navigation}
           navWorkout={navWorkout}
+          navWorkoutEdit={navWorkoutEdit}
         />
         {navCreate || navEdit ? (
           <ProgramModal
@@ -38,12 +40,12 @@ const Modal = ({
             status={status}
             updateStateFunc={updateStateFunc}
           />
-        ) : navWorkout ? (
+        ) : navWorkout || navWorkoutEdit ? (
           <WorkoutModal
+            navWorkoutEdit={navWorkoutEdit}
             navWorkoutId={navWorkoutId}
             navWorkout={navWorkout}
             navEditData={navEditData}
-            navEdit={navEdit}
             navigation={navigation}
             status={status}
             updateStateFunc={updateStateFunc}
