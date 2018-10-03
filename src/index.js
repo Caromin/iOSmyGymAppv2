@@ -37,9 +37,9 @@ const HomeStack = createStackNavigator(
 
 const ProgramStack = createStackNavigator(
   {
-    SelectedWorkout: SelectedWorkoutContainer,
     Programs: ProgramContainer,
-    ActiveWorkouts: ActiveWorkoutContainer
+    ActiveWorkouts: ActiveWorkoutContainer,
+    SelectedWorkout: SelectedWorkoutContainer
   },
   options
 );

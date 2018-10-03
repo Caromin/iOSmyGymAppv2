@@ -5,6 +5,7 @@ import ProgramModal from "./ProgramModal/ProgramModal";
 import HomeModal from "./HomeModal/HomeModal";
 import HeaderModal from "./HeaderModal/HeaderModal";
 import WorkoutModal from "./WorkoutModal/WorkoutModal";
+import SelectedWorkoutModal from "./SelectedWorkoutModal/SelectedWorkoutModal";
 
 const Modal = ({
   navEdit,
@@ -16,7 +17,9 @@ const Modal = ({
   navEditData,
   navWorkout,
   navWorkoutId,
-  navWorkoutEdit
+  navWorkoutEdit,
+  navSelectedId,
+  navSelected
 }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
@@ -31,8 +34,15 @@ const Modal = ({
           navigation={navigation}
           navWorkout={navWorkout}
           navWorkoutEdit={navWorkoutEdit}
+          navSelected={navSelected}
         />
-        {navCreate || navEdit ? (
+        {navSelected ? (
+          <SelectedWorkoutModal
+            navSelected={navSelected}
+            navSelectedId={navSelectedId}
+            navigation={navigation}
+          />
+        ) : navCreate || navEdit ? (
           <ProgramModal
             navEditData={navEditData}
             navEdit={navEdit}

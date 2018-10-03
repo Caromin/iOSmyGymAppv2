@@ -37,18 +37,22 @@ export default class ModalContainer extends Component {
   render() {
     const { navigation } = this.props;
     // from home screen
-    const navParam = navigation.getParam("selected", "none");
+    const navParam = navigation.getParam("selected", undefined);
     // from create new PROGRAM
     const navCreate = navigation.getParam("createProgram", false);
     // from editng program w/ object selected
     const navEdit = navigation.getParam("editing", false);
     // if editing this is the data
-    const navEditData = navigation.getParam("currentObj", null);
+    const navEditData = navigation.getParam("currentObj", undefined);
     // from create new WORKOUT
     const navWorkout = navigation.getParam("createWorkout", false);
-    const navWorkoutId = navigation.getParam("navId", null);
+    const navWorkoutId = navigation.getParam("navId", undefined);
     // from create edit WORKOUT
     const navWorkoutEdit = navigation.getParam("workoutEditing", false);
+    // from create SELECTED
+    const navSelectedId = navigation.getParam("selectedWorkoutId", undefined);
+    const navSelected = navigation.getParam("selectedWorkout", false);
+
     return (
       <View style={{ flex: 1 }}>
         <Modal
@@ -62,6 +66,8 @@ export default class ModalContainer extends Component {
           navWorkout={navWorkout}
           navWorkoutId={navWorkoutId}
           navWorkoutEdit={navWorkoutEdit}
+          navSelectedId={navSelectedId}
+          navSelected={navSelected}
         />
       </View>
     );

@@ -3,11 +3,11 @@ import { View, Text, ScrollView } from "react-native";
 
 import globalStyles from "../../styles";
 
-const SelectedWorkout = ({ navigation }) => {
+const SelectedWorkout = ({ navigation, workoutId }) => {
   return (
     <View style={globalStyles.defaultScrollView}>
       <View style={globalStyles.defaultEmptyPage}>
-        <Text>Begin your exercise program!</Text>
+        <Text>Start adding exercises!</Text>
       </View>
     </View>
   );

@@ -55,7 +55,10 @@ const ActiveWorkout = ({
         subtitle={obj.description}
         subtitleStyle={globalStyles.defaultListItem}
         onPress={() => {
-          navigation.navigate("SelectedWorkout", { id: obj.id });
+          navigation.navigate("SelectedWorkout", {
+            id: obj.id,
+            workoutTitle: obj.title
+          });
         }}
       />
     </Swipeout>
