@@ -1,5 +1,5 @@
 import React from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Text } from "react-native";
 import uuidv1 from "uuid/v1";
 import { List, ListItem } from "react-native-elements";
 
@@ -35,6 +35,20 @@ const SearchResults = ({ state, saveDataToWorkout }) => {
       <ScrollView alwaysBounceVertical={false}>
         <List containerStyle={globalStyles.defaultListMargin}>{postItems}</List>
       </ScrollView>
+      {/* <View
+        style={{
+          position: "absolute",
+          bottom: 0,
+          right: 0,
+          height: 50,
+          width: 50,
+          backgroundColor: "yellow",
+          justifyContent: "center",
+          alignItems: "center"
+        }}
+      >
+        <Text>+</Text>
+      </View> */}
     </View>
   );
 };

@@ -5,7 +5,6 @@
 
 # dependencies
 /node_modules
-/src/apiKeys/ApiKeys.js
 
 # misc
 .env

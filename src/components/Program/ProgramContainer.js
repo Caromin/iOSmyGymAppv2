@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native";
-import * as firebase from "firebase";
-require("firebase/firestore");
+import { View } from "react-native";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { AsyncStorage } from "react-native";
@@ -20,18 +18,13 @@ class ProgramContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      db: firebase.firestore()
-    };
+    this.state = {};
+
     this.setStorageProgram = this.setStorageProgram.bind(this);
     this.getStorageProgram = this.getStorageProgram.bind(this);
   }
 
   componentWillMount = () => {
-    this.state.db.settings({
-      timestampsInSnapshots: true
-    });
-
     // AsyncStorage.clear();
     this.getStorageProgram();
   };

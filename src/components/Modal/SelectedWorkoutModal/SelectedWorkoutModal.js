@@ -3,6 +3,7 @@ import { View, ScrollView, Text } from "react-native";
 import { SearchBar } from "react-native-elements";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+const uuidv1 = require("uuid/v1");
 
 import { addExerciseAction } from "../../../actions/exerciseActions";
 import UserExerciseList from "./UserExerciseList/UserExerciseList";
@@ -20,6 +21,10 @@ class SelectedWorkoutModal extends Component {
       searchString: "",
       resultsArr: [],
       pendingSavedArr: []
+      // expand: {
+      //   results: false,
+      //   pending: false
+      // }
     };
     this.searchAndFind = this.searchAndFind.bind(this);
     this.saveDataToWorkout = this.saveDataToWorkout.bind(this);
@@ -44,7 +49,10 @@ class SelectedWorkoutModal extends Component {
   };
 
   saveDataToWorkout = obj => {
-    this.setState({ pendingSavedArr: [...this.state.pendingSavedArr, obj] });
+    const objWithId = Object.assign(obj, { directId: uuidv1() });
+    this.setState({
+      pendingSavedArr: [...this.state.pendingSavedArr, objWithId]
+    });
   };
 
   callAction = data => {
@@ -114,12 +122,12 @@ class SelectedWorkoutModal extends Component {
           }}
         >
           <Text>Search Results:</Text>
-          <ScrollView style={styles.selectedWorkoutScroll}>
+          <View style={styles.selectedWorkoutScroll}>
             <SearchResults
               state={this.state}
               saveDataToWorkout={this.saveDataToWorkout}
             />
-          </ScrollView>
+          </View>
         </View>
         <View
           style={{
@@ -128,12 +136,12 @@ class SelectedWorkoutModal extends Component {
           }}
         >
           <Text>Add Pending:</Text>
-          <ScrollView style={styles.selectedWorkoutScroll}>
+          <View style={styles.selectedWorkoutScroll}>
             <UserExerciseList
               state={this.state}
               removeFromArr={this.removeFromArr}
             />
-          </ScrollView>
+          </View>
         </View>
         <SaveWorkoutList
           navigation={navigation}

@@ -9,7 +9,7 @@
       "muscleGroup": "Shoulders and Traps"
     },
     {
-      "title": "Leverage Shrug || Hammerstrength",
+      "title": "Leverage Shrug",
       "equipment": "Machine",
       "difficulty": "Easy",
       "estimatedTime": 5,
@@ -41,7 +41,7 @@
       "muscleGroup": "Shoulders and Traps"
     },
     {
-      "title": "Lateral Raise || Power Partials",
+      "title": "Lateral Raise",
       "equipment": "Dumbbell",
       "difficulty": "Easy",
       "estimatedTime": 5,
@@ -131,7 +131,7 @@
     {
       "title": "Smith Machine Behind the Back Shrug",
       "equipment": "Dumbbell",
-      "difficulty": "Machine",
+      "difficulty": "Easy",
       "estimatedTime": 5,
       "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
@@ -729,7 +729,15 @@
       "muscleGroup": "Quads"
     },
     {
-      "title": "Barbell Full Squat || Olympic Squat",
+      "title": "Barbell Full Squat",
+      "equipment": "Barbell",
+      "difficulty": "Hard",
+      "estimatedTime": 10,
+      "avatarURL": require("./src/components/Home/images/quadriceps.png"),
+      "muscleGroup": "Quads"
+    },
+    {
+      "title": "Olympic Squat",
       "equipment": "Barbell",
       "difficulty": "Hard",
       "estimatedTime": 10,
@@ -897,7 +905,15 @@
       "muscleGroup": "Triceps"
     },
     {
-      "title": "EZ Bar Triceps Extension || Skullcrusher",
+      "title": "EZ Bar Triceps Extension",
+      "equipment": "Barbell",
+      "difficulty": "Easy",
+      "estimatedTime": 5,
+      "avatarURL": require("./src/components/Home/images/row2image5triceps1.png"),
+      "muscleGroup": "Triceps"
+    },
+    {
+      "title": "Skullcrushers",
       "equipment": "Barbell",
       "difficulty": "Easy",
       "estimatedTime": 5,

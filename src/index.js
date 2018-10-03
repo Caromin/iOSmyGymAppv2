@@ -4,14 +4,12 @@ import {
   createBottomTabNavigator
 } from "react-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import * as firebase from "firebase";
 
 // components
 import HomeContainer from "./components/Home/HomeContainer";
 import ProgramContainer from "./components/Program/ProgramContainer";
 import SettingsContainer from "./components/Settings/SettingsContainer";
 import ModalContainer from "./components/Modal/ModalContainer";
-import ApiKeys from "./apiKeys/ApiKeys";
 import ActiveWorkoutContainer from "./components/ActiveWorkout/ActiveWorkoutContainer";
 import SelectedWorkoutContainer from "./components/SelectedWorkout/SelectedWorkoutContainer";
 
@@ -111,10 +109,6 @@ const RootStack = createStackNavigator(
 export class Root extends Component {
   constructor() {
     super();
-    // if length is 0 which is false, which ! makes into true
-    if (!firebase.apps.length) {
-      firebase.initializeApp(ApiKeys.FirebaseConfig);
-    }
   }
 
   render() {
