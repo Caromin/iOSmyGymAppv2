@@ -24,7 +24,44 @@ class SelectedWorkoutModal extends Component {
 
   searchAndFind = value => {
     this.setState({ searchString: value });
-    console.log(exerciseList);
+    const newValue = value.toUpperCase();
+    const regexValue = new RegExp("(" + newValue.replace(" ", "|") + ")");
+    const testArr = [];
+
+    const searchFunc = new Promise((resolve, reject) => {
+      let length = value.length;
+      if (length > 2) {
+        exerciseList.exercises.forEach(index => {
+          const title = index.title.toUpperCase();
+          title.includes(newValue) ? testArr.push(index) : null;
+        });
+      }
+      resolve(length);
+    });
+
+    const updateState = new Promise((resolve, reject) => {
+      searchFunc.then(valueLength => {
+        if (testArr.length === 0 && valueLength > 2) {
+          exerciseList.exercises.forEach(index => {
+            if (testArr.length === 20) {
+              // console.log("Selected Workout Modal: length is at 20");
+              return;
+            }
+            const title = index.title.toUpperCase();
+            regexValue.test(title) ? testArr.push(index) : null;
+          });
+          resolve();
+          // console.log("Selected Workout Modal: if statement", testArr);
+        } else {
+          resolve();
+          // console.log("Selected Workout Modal: else statement", testArr);
+        }
+      });
+    });
+
+    updateState.then(() => {
+      this.setState({ resultsArr: testArr });
+    });
   };
 
   render() {
@@ -49,7 +86,7 @@ class SelectedWorkoutModal extends Component {
         >
           <Text>Search Results:</Text>
           <ScrollView style={styles.selectedWorkoutScroll}>
-            <SearchResults />
+            <SearchResults state={this.state} />
           </ScrollView>
         </View>
         <View

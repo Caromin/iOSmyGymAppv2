@@ -1,10 +1,10 @@
 {
-  "Exercises": [
+  "exercises": [
     {
       "title": "Smith Machine Shrug",
       "equipment": "Machine",
       "difficulty": "Easy",
-      "estimatedtime": 5,
+      "estimatedTime": 5,
       "avatarURL": "./src/components/Home/images/row1.png",
       "muscleGroup": "Shoulders and Traps"
     },
