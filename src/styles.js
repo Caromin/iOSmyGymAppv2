@@ -47,6 +47,9 @@ const globalStyles = EStyleSheet.create({
     fontSize: 12,
     fontWeight: "200",
     letterSpacing: 0.5
+  },
+  defaultListMargin: {
+    marginTop: 1
   }
 });
 

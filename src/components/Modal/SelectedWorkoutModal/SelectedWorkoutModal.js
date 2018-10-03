@@ -4,6 +4,7 @@ import { SearchBar } from "react-native-elements";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
+import { addExerciseAction } from "../../../actions/exerciseActions";
 import UserExerciseList from "./UserExerciseList/UserExerciseList";
 import SearchResults from "./SearchResults/SearchResults";
 import { SaveWorkoutList } from "../../Buttons/Buttons";
@@ -17,10 +18,38 @@ class SelectedWorkoutModal extends Component {
     this.state = {
       workoutId: this.props.navSelectedId,
       searchString: "",
-      resultsArr: []
+      resultsArr: [],
+      pendingSavedArr: []
     };
     this.searchAndFind = this.searchAndFind.bind(this);
+    this.saveDataToWorkout = this.saveDataToWorkout.bind(this);
+    this.removeFromArr = this.removeFromArr.bind(this);
+    this.callAction = this.callAction.bind(this);
   }
+
+  removeFromArr = obj => {
+    let tempArr = this.state.pendingSavedArr;
+    const arrPromise = new Promise(resolve => {
+      for (i = 0; i < tempArr.length; i++) {
+        if (tempArr[i].title === obj.title) {
+          tempArr.splice(i, 1);
+          break;
+        }
+      }
+      resolve();
+    });
+    arrPromise.then(() => {
+      this.setState({ pendingSavedArr: tempArr });
+    });
+  };
+
+  saveDataToWorkout = obj => {
+    this.setState({ pendingSavedArr: [...this.state.pendingSavedArr, obj] });
+  };
+
+  callAction = data => {
+    this.props.addExerciseAction(data);
+  };
 
   searchAndFind = value => {
     this.setState({ searchString: value });
@@ -86,7 +115,10 @@ class SelectedWorkoutModal extends Component {
         >
           <Text>Search Results:</Text>
           <ScrollView style={styles.selectedWorkoutScroll}>
-            <SearchResults state={this.state} />
+            <SearchResults
+              state={this.state}
+              saveDataToWorkout={this.saveDataToWorkout}
+            />
           </ScrollView>
         </View>
         <View
@@ -95,12 +127,19 @@ class SelectedWorkoutModal extends Component {
             padding: 10
           }}
         >
-          <Text>Current List:</Text>
+          <Text>Add Pending:</Text>
           <ScrollView style={styles.selectedWorkoutScroll}>
-            <UserExerciseList />
+            <UserExerciseList
+              state={this.state}
+              removeFromArr={this.removeFromArr}
+            />
           </ScrollView>
         </View>
-        <SaveWorkoutList navigation={navigation} />
+        <SaveWorkoutList
+          navigation={navigation}
+          callAction={this.callAction}
+          state={this.state}
+        />
       </View>
     );
   }
@@ -110,4 +149,7 @@ SelectedWorkoutModal.propTypes = {};
 
 const mapStateToProps = state => ({});
 
-export default connect(null)(SelectedWorkoutModal);
+export default connect(
+  null,
+  { addExerciseAction }
+)(SelectedWorkoutModal);

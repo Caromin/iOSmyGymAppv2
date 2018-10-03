@@ -59,7 +59,7 @@ const Program = ({ programList, removeProgramAction, navigation }) => {
   return (
     <View style={globalStyles.defaultScrollView}>
       <ScrollView alwaysBounceVertical={false}>
-        <List>{postItems}</List>
+        <List containerStyle={globalStyles.defaultListMargin}>{postItems}</List>
       </ScrollView>
     </View>
   );

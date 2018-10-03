@@ -5,7 +5,7 @@ import { List, ListItem } from "react-native-elements";
 
 import globalStyles from "../../../../styles";
 
-const SearchResults = ({ state }) => {
+const SearchResults = ({ state, saveDataToWorkout }) => {
   difficultyColor = () => {
     console.log("hi");
   };
@@ -14,21 +14,26 @@ const SearchResults = ({ state }) => {
     <ListItem
       key={uuidv1()}
       roundAvatar
-      avatar={{}}
-      avatarContainerStyle={{ backgroundColor: "black" }}
-      title={obj.title}
-      subtitle={`${obj.muscleGroup}, est: ${obj.estimatedTime} mins`}
-      subtitleStyle={globalStyles.defaultListItem}
-      onPress={() => {
-        console.log("working");
+      avatar={obj.avatarURL}
+      rightIcon={{
+        name: "plus-box-outline",
+        color: "#000",
+        type: "material-community"
       }}
+      onPressRightIcon={() => {
+        saveDataToWorkout(obj);
+      }}
+      title={obj.title}
+      subtitle={`Difficulty: ${obj.difficulty}, ${obj.muscleGroup}`}
+      subtitleStyle={globalStyles.defaultListItem}
+      onPress={() => {}}
     />
   ));
 
   return (
     <View style={{ flex: 1 }}>
       <ScrollView alwaysBounceVertical={false}>
-        <List containerStyle={{ marginTop: 1 }}>{postItems}</List>
+        <List containerStyle={globalStyles.defaultListMargin}>{postItems}</List>
       </ScrollView>
     </View>
   );

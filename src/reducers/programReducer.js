@@ -90,7 +90,6 @@ export default function(state = inititalState, action) {
           return index;
         }
       });
-      // console.log(arrWorkout);
       return {
         ...state,
         programList: arrWorkout

@@ -5,7 +5,7 @@
       "equipment": "Machine",
       "difficulty": "Easy",
       "estimatedTime": 5,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -13,7 +13,7 @@
       "equipment": "Machine",
       "difficulty": "Easy",
       "estimatedTime": 5,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -21,7 +21,7 @@
       "equipment": "Dumbbell",
       "difficulty": "Easy",
       "estimatedTime": 5,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -29,7 +29,7 @@
       "equipment": "Dumbbell",
       "difficulty": "Medium",
       "estimatedTime": 5,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -37,7 +37,7 @@
       "equipment": "Dumbbell",
       "difficulty": "Easy",
       "estimatedTime": 10,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -45,7 +45,7 @@
       "equipment": "Dumbbell",
       "difficulty": "Easy",
       "estimatedTime": 5,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -53,7 +53,7 @@
       "equipment": "Dumbbell",
       "difficulty": "Easy",
       "estimatedTime": 10,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -61,7 +61,7 @@
       "equipment": "Barbell",
       "difficulty": "Medium",
       "estimatedTime": 10,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -69,7 +69,7 @@
       "equipment": "Kettlebells",
       "difficulty": "Medium",
       "estimatedTime": 5,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -77,7 +77,7 @@
       "equipment": "Dumbbell",
       "difficulty": "Medium",
       "estimatedTime": 10,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -85,7 +85,7 @@
       "equipment": "Barbell",
       "difficulty": "Hard",
       "estimatedTime": 15,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -93,7 +93,7 @@
       "equipment": "Barbell",
       "difficulty": "Hard",
       "estimatedTime": 15,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -101,7 +101,7 @@
       "equipment": "Barbell",
       "difficulty": "Medium",
       "estimatedTime": 15,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -109,7 +109,7 @@
       "equipment": "Dumbbell",
       "difficulty": "Medium",
       "estimatedTime": 10,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -117,7 +117,7 @@
       "equipment": "Barbell",
       "difficulty": "Medium",
       "estimatedTime": 10,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -125,7 +125,7 @@
       "equipment": "Machine",
       "difficulty": "Easy",
       "estimatedTime": 10,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -133,7 +133,7 @@
       "equipment": "Dumbbell",
       "difficulty": "Machine",
       "estimatedTime": 5,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -141,7 +141,7 @@
       "equipment": "Bands",
       "difficulty": "Easy",
       "estimatedTime": 5,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -149,7 +149,7 @@
       "equipment": "Cable",
       "difficulty": "Easy",
       "estimatedTime": 5,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -157,7 +157,7 @@
       "equipment": "Cable",
       "difficulty": "Medium",
       "estimatedTime": 5,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -165,7 +165,7 @@
       "equipment": "Barbell",
       "difficulty": "Easy",
       "estimatedTime": 10,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -173,7 +173,7 @@
       "equipment": "Machine",
       "difficulty": "Easy",
       "estimatedTime": 5,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -181,7 +181,7 @@
       "equipment": "Dumbbell",
       "difficulty": "Easy",
       "estimatedTime": 5,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -189,7 +189,7 @@
       "equipment": "Kettlebells",
       "difficulty": "Medium",
       "estimatedTime": 5,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     },
     {
@@ -197,7 +197,7 @@
       "equipment": "Dumbbell",
       "difficulty": "Easy",
       "estimatedTime": 5,
-      "avatarURL": "./src/components/Home/images/row1.png",
+      "avatarURL": require("./src/components/Home/images/shouldersandtraps.png"),
       "muscleGroup": "Shoulders and Traps"
     }
   ]

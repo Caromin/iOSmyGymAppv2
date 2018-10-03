@@ -22,14 +22,14 @@ class SelectedWorkoutContainer extends Component {
   constructor(props) {
     super(props);
   }
+  componentDidUpdate() {
+    console.log("was updated");
+  }
 
   render() {
     const { navigation } = this.props;
-    console.log(
-      "ParamId from activeworkouts -> navigation: ",
-      navigation.getParam("id", "none")
-    );
     const workoutId = navigation.getParam("id", "none found");
+    console.log("workoutId: ", workoutId);
 
     return (
       <View style={{ flex: 1 }}>
@@ -40,8 +40,12 @@ class SelectedWorkoutContainer extends Component {
   }
 }
 
-SelectedWorkoutContainer.propTypes = {};
+SelectedWorkoutContainer.propTypes = {
+  exerciseList: PropTypes.array
+};
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  exerciseList: state.exerciseReducer.exerciseArr
+});
 
 export default connect(mapStateToProps)(SelectedWorkoutContainer);

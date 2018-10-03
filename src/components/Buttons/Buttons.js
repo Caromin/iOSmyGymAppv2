@@ -57,22 +57,28 @@ export const BeginWorkout = ({ navigation, workoutId }) => {
   );
 };
 
-export const SaveWorkoutList = ({ navigation, workoutId }) => {
+export const SaveWorkoutList = ({ navigation, state, callAction }) => {
   return (
     <View style={styles.defaultButtonBot}>
       <Button
         large
-        buttonStyle={globalStyles.redBackground}
+        buttonStyle={globalStyles.greenBackground}
         textStyle={globalStyles.defaultTextColor}
         icon={{
           name: "save",
           type: "entypo",
           color: "#000"
         }}
+        disabled={state.pendingSavedArr.length === 0 ? true : false}
         onPress={() => {
-          console.log("component not installed");
+          const data = {
+            workoutReferenceId: state.workoutId,
+            list: state.pendingSavedArr
+          };
+          callAction(data);
+          navigation.goBack();
         }}
-        title="Save List"
+        title="Save"
       />
     </View>
   );

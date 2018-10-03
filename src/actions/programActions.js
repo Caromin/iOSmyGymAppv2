@@ -7,7 +7,6 @@ export const ADD_NEW_WORKOUT = "ADD_NEW_WORKOUT";
 export const EDIT_WORKOUT = "EDIT_WORKOUT";
 
 export const getLocalAction = data => dispatch => {
-  // console.log(data)
   dispatch({
     type: GET_LOCAL_ACTION,
     payload: data
@@ -22,7 +21,6 @@ export const addProgramAction = data => dispatch => {
 };
 
 export const editProgramAction = data => dispatch => {
-  console.log("making sure");
   dispatch({
     type: EDIT_PROGRAM,
     payload: data
