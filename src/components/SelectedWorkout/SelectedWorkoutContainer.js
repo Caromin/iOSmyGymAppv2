@@ -30,11 +30,12 @@ class SelectedWorkoutContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log("on receive props: ", nextProps.exerciseList);
     this.updateState(nextProps);
   }
 
-  removeAction = (exerciseToDelete, lookAtWorkoutId) => {
-    this.props.removeExerciseAction(exerciseToDelete, lookAtWorkoutId);
+  removeAction = (objDirectId, passedWorkoutId) => {
+    this.props.removeExerciseAction(objDirectId, passedWorkoutId);
   };
 
   updateState = nextProps => {

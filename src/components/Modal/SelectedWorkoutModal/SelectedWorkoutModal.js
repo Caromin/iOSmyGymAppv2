@@ -17,7 +17,7 @@ class SelectedWorkoutModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      workoutId: this.props.navSelectedId,
+      workoutId: this.props.selectedWorkoutId,
       searchString: "",
       resultsArr: [],
       pendingSavedArr: []
@@ -30,6 +30,10 @@ class SelectedWorkoutModal extends Component {
     this.saveDataToWorkout = this.saveDataToWorkout.bind(this);
     this.removeFromArr = this.removeFromArr.bind(this);
     this.callAction = this.callAction.bind(this);
+  }
+
+  componentDidUpdate() {
+    // console.log(this.state.pendingSavedArr);
   }
 
   removeFromArr = obj => {
@@ -49,7 +53,8 @@ class SelectedWorkoutModal extends Component {
   };
 
   saveDataToWorkout = obj => {
-    const objWithId = Object.assign(obj, { directId: uuidv1() });
+    const objWithId = Object.assign({}, obj, { directId: uuidv1() });
+
     this.setState({
       pendingSavedArr: [...this.state.pendingSavedArr, objWithId]
     });

@@ -23,6 +23,7 @@ const SearchResults = ({ state, saveDataToWorkout }) => {
       onPressRightIcon={() => {
         saveDataToWorkout(obj);
       }}
+      disabled={false}
       title={obj.title}
       subtitle={`Difficulty: ${obj.difficulty}, ${obj.muscleGroup}`}
       subtitleStyle={globalStyles.defaultListItem}

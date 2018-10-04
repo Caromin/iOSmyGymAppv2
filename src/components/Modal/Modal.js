@@ -18,7 +18,7 @@ const Modal = ({
   navWorkout,
   navWorkoutId,
   navWorkoutEdit,
-  navSelectedId,
+  selectedWorkoutId,
   navSelected
 }) => {
   return (
@@ -39,7 +39,7 @@ const Modal = ({
         {navSelected ? (
           <SelectedWorkoutModal
             navSelected={navSelected}
-            navSelectedId={navSelectedId}
+            selectedWorkoutId={selectedWorkoutId}
             navigation={navigation}
           />
         ) : navCreate || navEdit ? (

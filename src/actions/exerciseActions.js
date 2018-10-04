@@ -2,6 +2,7 @@ export const ADD_EXERCISE = "ADD_EXERCISE";
 export const REMOVE_EXERCISE = "REMOVE_EXERCISE";
 
 export const addExerciseAction = data => dispatch => {
+  // console.log("inside actions: ", data.list);
   data.list.length === 0
     ? null
     : dispatch({
@@ -10,10 +11,10 @@ export const addExerciseAction = data => dispatch => {
       });
 };
 
-export const removeExerciseAction = (exerciseIdObj, workoutId) => dispatch => {
+export const removeExerciseAction = (objDirectId, workoutId) => dispatch => {
   dispatch({
     type: REMOVE_EXERCISE,
-    payload: exerciseIdObj,
+    payload: objDirectId,
     workoutId: workoutId
   });
 };

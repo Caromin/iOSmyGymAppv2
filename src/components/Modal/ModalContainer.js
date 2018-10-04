@@ -50,7 +50,10 @@ export default class ModalContainer extends Component {
     // from create edit WORKOUT
     const navWorkoutEdit = navigation.getParam("workoutEditing", false);
     // from create SELECTED
-    const navSelectedId = navigation.getParam("selectedWorkoutId", undefined);
+    const selectedWorkoutId = navigation.getParam(
+      "selectedWorkoutId",
+      undefined
+    );
     const navSelected = navigation.getParam("selectedWorkout", false);
 
     return (
@@ -66,7 +69,7 @@ export default class ModalContainer extends Component {
           navWorkout={navWorkout}
           navWorkoutId={navWorkoutId}
           navWorkoutEdit={navWorkoutEdit}
-          navSelectedId={navSelectedId}
+          selectedWorkoutId={selectedWorkoutId}
           navSelected={navSelected}
         />
       </View>
