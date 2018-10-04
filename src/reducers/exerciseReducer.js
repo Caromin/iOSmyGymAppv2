@@ -1,4 +1,8 @@
-import { ADD_EXERCISE, REMOVE_EXERCISE } from "../actions/exerciseActions";
+import {
+  ADD_EXERCISE,
+  REMOVE_EXERCISE,
+  REFRESH_FROM_LOCALSTORAGE
+} from "../actions/exerciseActions";
 
 export const inititalState = {
   exerciseArr: [
@@ -30,6 +34,12 @@ export const inititalState = {
 
 export default function(state = inititalState, action) {
   switch (action.type) {
+    case REFRESH_FROM_LOCALSTORAGE:
+      // console.log(action.payload);
+      return {
+        ...state,
+        exerciseArr: action.payload
+      };
     case ADD_EXERCISE:
       isCombined = false;
       const combineSameId = state.exerciseArr.map(index => {
