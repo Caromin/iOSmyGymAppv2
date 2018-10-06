@@ -1,7 +1,8 @@
 import {
   ADD_EXERCISE,
   REMOVE_EXERCISE,
-  REFRESH_FROM_LOCALSTORAGE
+  REFRESH_FROM_LOCALSTORAGE,
+  REORDER_LIST
 } from "../actions/exerciseActions";
 
 export const inititalState = {
@@ -86,53 +87,26 @@ export default function(state = inititalState, action) {
         ...state,
         exerciseArr: removeSameId
       };
+    case REORDER_LIST:
+      const reorderArr = state.exerciseArr.map(index => {
+        if (index.workoutReferenceId === action.workoutId) {
+          let list = index.list;
+          list.splice(
+            action.payload.to,
+            0,
+            list.splice(action.payload.from, 1)[0]
+          );
+          let newArr = list;
+          return index;
+        }
+        return index;
+      });
+      // console.log("new array: ", reorderArr);
+      return {
+        ...state,
+        exerciseArr: reorderArr
+      };
     default:
       return state;
   }
 }
-// 05:14:26: before removed:  Array [
-//   05:14:26:   Object {
-//   05:14:26:     "list": Array [
-//   05:14:26:       Object {
-//   05:14:26:         "avatarURL": 16,
-//   05:14:26:         "difficulty": "Easy",
-//   05:14:26:         "directId": 1000,
-//   05:14:26:         "equipment": "Dumbbell",
-//   05:14:26:         "estimatedTime": 5,
-//   05:14:26:         "muscleGroup": "Shoulders and Traps",
-//   05:14:26:         "title": "Reverse Flyes",
-//   05:14:26:       },
-//   05:14:26:       Object {
-//   05:14:26:         "avatarURL": 16,
-//   05:14:26:         "difficulty": "Easy",
-//   05:14:26:         "directId": 1001,
-//   05:14:26:         "equipment": "Machine",
-//   05:14:26:         "estimatedTime": 5,
-//   05:14:26:         "muscleGroup": "Shoulders and Traps",
-//   05:14:26:         "title": "Leverage Shrug",
-//   05:14:26:       },
-//   05:14:26:     ],
-//   05:14:26:     "workoutReferenceId": "d6d338c0-c66a-11e8-b7f9-0bf58f9dd07c",
-//   05:14:26:   },
-//   05:14:26:   Object {
-//   05:14:26:     "list": Array [
-//   05:14:26:       Object {
-//   05:14:26:         "avatarURL": 16,
-//   05:14:26:         "difficulty": "Easy",
-//   05:14:26:         "directId": "e2987390-c7b5-11e8-a543-598d37617d34",05:14:26:         "equipment": "Machine",
-//   05:14:26:         "estimatedTime": 5,
-//   05:14:26:         "muscleGroup": "Shoulders and Traps",
-//   05:14:26:         "title": "Smith Machine Shrug",
-//   05:14:26:       },
-//   05:14:26:       Object {
-//   05:14:26:         "avatarURL": 16,
-//   05:14:26:         "difficulty": "Easy",
-//   05:14:26:         "directId": "e2d6dc20-c7b5-11e8-a543-598d37617d34",05:14:26:         "equipment": "Machine",
-//   05:14:26:         "estimatedTime": 5,
-//   05:14:26:         "muscleGroup": "Shoulders and Traps",
-//   05:14:26:         "title": "Smith Machine Shrug",
-//   05:14:26:       },
-//   05:14:26:     ],
-//   05:14:26:     "workoutReferenceId": "189a18d0-c785-11e8-92f8-274c004a8b60",
-//   05:14:26:   },
-//   05:14:26: ]

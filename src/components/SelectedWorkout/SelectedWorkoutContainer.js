@@ -6,7 +6,8 @@ import { AsyncStorage } from "react-native";
 
 import {
   removeExerciseAction,
-  refreshReduxAction
+  refreshReduxAction,
+  reorderListAction
 } from "../../actions/exerciseActions";
 import { AddWorkout, BeginWorkout } from "../Buttons/Buttons";
 import SelectedWorkout from "./SelectedWorkout";
@@ -32,6 +33,7 @@ class SelectedWorkoutContainer extends Component {
     this.updateState = this.updateState.bind(this);
     this.removeAction = this.removeAction.bind(this);
     this.getStorageProgram = this.getStorageProgram.bind(this);
+    this.reorderList = this.reorderList.bind(this);
   }
   componentWillMount() {
     this.getStorageProgram();
@@ -41,6 +43,10 @@ class SelectedWorkoutContainer extends Component {
     // console.log("on receive props: ", nextProps.exerciseList);
     this.updateState(nextProps);
   }
+
+  reorderList = (indexData, workoutId) => {
+    this.props.reorderListAction(indexData, workoutId);
+  };
 
   removeAction = (objDirectId, passedWorkoutId) => {
     this.props.removeExerciseAction(objDirectId, passedWorkoutId);
@@ -90,6 +96,7 @@ class SelectedWorkoutContainer extends Component {
           workoutId={workoutId}
           list={this.state.list}
           remove={this.removeAction}
+          reorderList={this.reorderList}
         />
         <BeginWorkout workoutId={workoutId} navigation={navigation} />
       </View>
@@ -107,5 +114,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { removeExerciseAction, refreshReduxAction }
+  { removeExerciseAction, refreshReduxAction, reorderListAction }
 )(SelectedWorkoutContainer);

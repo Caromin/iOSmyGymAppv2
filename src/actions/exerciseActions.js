@@ -1,6 +1,7 @@
 export const ADD_EXERCISE = "ADD_EXERCISE";
 export const REMOVE_EXERCISE = "REMOVE_EXERCISE";
 export const REFRESH_FROM_LOCALSTORAGE = "REFRESH_FROM_LOCALSTORAGE";
+export const REORDER_LIST = "REORDER_LIST";
 
 export const addExerciseAction = data => dispatch => {
   // console.log("inside actions: ", data.list);
@@ -25,5 +26,13 @@ export const refreshReduxAction = data => dispatch => {
   dispatch({
     type: REFRESH_FROM_LOCALSTORAGE,
     payload: data
+  });
+};
+
+export const reorderListAction = (data, workoutId) => dispatch => {
+  dispatch({
+    type: REORDER_LIST,
+    payload: data,
+    workoutId: workoutId
   });
 };
