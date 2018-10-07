@@ -12,6 +12,8 @@ import SettingsContainer from "./components/Settings/SettingsContainer";
 import ModalContainer from "./components/Modal/ModalContainer";
 import ActiveWorkoutContainer from "./components/ActiveWorkout/ActiveWorkoutContainer";
 import SelectedWorkoutContainer from "./components/SelectedWorkout/SelectedWorkoutContainer";
+import IsActiveContainer from "./components/IsActive/IsActiveContainer";
+import SingleExercise from './components/IsActive/SingleExercise';
 
 const options = {
   navigationOptions: {
@@ -37,7 +39,9 @@ const ProgramStack = createStackNavigator(
   {
     Programs: ProgramContainer,
     ActiveWorkouts: ActiveWorkoutContainer,
-    SelectedWorkout: SelectedWorkoutContainer
+    SelectedWorkout: SelectedWorkoutContainer,
+    IsActive: IsActiveContainer,
+    SingleExercise: SingleExercise
   },
   options
 );

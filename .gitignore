@@ -5,6 +5,7 @@
 
 # dependencies
 /node_modules
+/src/components
 
 # misc
 .env

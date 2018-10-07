@@ -37,7 +37,7 @@ export const AddWorkout = ({ navigation, selectedWorkoutId }) => {
   );
 };
 
-export const BeginWorkout = ({ navigation, workoutId }) => {
+export const BeginWorkout = ({ navigation, workoutId, list, workoutTitle }) => {
   return (
     <View style={styles.defaultButtonBot}>
       <Button
@@ -49,7 +49,11 @@ export const BeginWorkout = ({ navigation, workoutId }) => {
           color: "black"
         }}
         onPress={() => {
-          console.log("component not installed");
+          navigation.navigate("IsActive", {
+            navigation: navigation,
+            workoutTitle: workoutTitle,
+            list: list
+          });
         }}
         title="Start Workout"
       />
@@ -57,7 +61,18 @@ export const BeginWorkout = ({ navigation, workoutId }) => {
   );
 };
 
-export const SaveWorkoutList = ({ navigation, state, callAction }) => {
+export const SaveWorkoutList = ({
+  navigation,
+  state,
+  callAction,
+  saveResults
+}) => {
+  let beDisabled =
+    state === undefined
+      ? false
+      : state.pendingSavedArr.length === 0
+        ? true
+        : false;
   return (
     <View style={styles.defaultButtonBot}>
       <Button
@@ -69,16 +84,20 @@ export const SaveWorkoutList = ({ navigation, state, callAction }) => {
           type: "entypo",
           color: "#000"
         }}
-        disabled={state.pendingSavedArr.length === 0 ? true : false}
+        disabled={beDisabled}
         onPress={() => {
-          const data = {
-            workoutReferenceId: state.workoutId,
-            list: state.pendingSavedArr
-          };
-          callAction(data);
-          navigation.goBack();
+          if (saveResults) {
+            console.log("hello bitches");
+          } else {
+            const data = {
+              workoutReferenceId: state.workoutId,
+              list: state.pendingSavedArr
+            };
+            callAction(data);
+            navigation.goBack();
+          }
         }}
-        title="Save"
+        title={saveResults ? "Finish Workout" : "Save"}
       />
     </View>
   );

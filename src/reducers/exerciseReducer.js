@@ -2,7 +2,8 @@ import {
   ADD_EXERCISE,
   REMOVE_EXERCISE,
   REFRESH_FROM_LOCALSTORAGE,
-  REORDER_LIST
+  REORDER_LIST,
+  CHANGE_ACTIVE
 } from "../actions/exerciseActions";
 
 export const inititalState = {
@@ -30,7 +31,11 @@ export const inititalState = {
       ],
       workoutReferenceId: "d6d338c0-c66a-11e8-b7f9-0bf58f9dd07c"
     }
-  ]
+  ],
+  isActive: false,
+  completedExercises: 0,
+  totalCompletedSets: 0,
+  pendingCompletedList: []
 };
 
 export default function(state = inititalState, action) {
@@ -105,6 +110,11 @@ export default function(state = inititalState, action) {
       return {
         ...state,
         exerciseArr: reorderArr
+      };
+    case CHANGE_ACTIVE:
+      return {
+        ...state,
+        isActive: action.payload
       };
     default:
       return state;

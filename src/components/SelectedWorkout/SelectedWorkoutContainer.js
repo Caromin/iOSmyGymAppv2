@@ -88,6 +88,7 @@ class SelectedWorkoutContainer extends Component {
   render() {
     const { navigation } = this.props;
     const workoutId = navigation.getParam("id", "none found");
+    const workoutTitle = navigation.getParam("workoutTitle");
 
     return (
       <View style={{ flex: 1 }}>
@@ -98,7 +99,12 @@ class SelectedWorkoutContainer extends Component {
           remove={this.removeAction}
           reorderList={this.reorderList}
         />
-        <BeginWorkout workoutId={workoutId} navigation={navigation} />
+        <BeginWorkout
+          workoutId={workoutId}
+          list={this.state.list}
+          navigation={navigation}
+          workoutTitle={workoutTitle}
+        />
       </View>
     );
   }
