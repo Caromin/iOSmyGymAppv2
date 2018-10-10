@@ -104,12 +104,10 @@ class ExerciseListContainer extends Component {
   };
 
   startWorkout = () => {
-    console.log("pending start");
-    // this.props.navigation.navigate("IsActive", {
-    //   navigation: navigation,
-    //   workoutTitle: workoutTitle,
-    //   list: list
-    // });
+    this.props.navigation.navigate("IsActive", {
+      workoutTitle: this.state.workoutTitle,
+      list: this.state.list
+    });
   };
 
   openModal = () => {

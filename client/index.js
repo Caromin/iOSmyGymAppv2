@@ -11,8 +11,8 @@ import SettingsContainer from "./containers/SettingsScreen/Container";
 import ProgramContainer from "./containers/ProgramScreen/ProgramContainer";
 import WorkoutContainer from "./containers/ProgramScreen/WorkoutContainer";
 import ExerciseListContainer from "./containers/ExerciseListScreen/Container";
-// import IsActiveContainer from "./components/IsActive/IsActiveContainer";
-// import SingleExercise from './components/IsActive/SingleExercise';
+import IsActiveContainer from "./containers/IsActiveScreen/Container";
+import SingleExerciseContainer from "./containers/IsActiveScreen/SingleExercise";
 
 const options = {
   navigationOptions: {
@@ -38,9 +38,9 @@ const ProgramStack = createStackNavigator(
   {
     Programs: ProgramContainer,
     Workouts: WorkoutContainer,
-    ExerciseList: ExerciseListContainer
-    // IsActive: IsActiveContainer,
-    // SingleExercise: SingleExercise
+    ExerciseList: ExerciseListContainer,
+    IsActive: IsActiveContainer,
+    SingleExercise: SingleExerciseContainer
   },
   options
 );
