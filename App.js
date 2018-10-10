@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
-import store from "./src/store/store";
+import store from "./client/store/store";
 
 // imported components
-import { Root } from "./src/index";
+import { Root } from "./client/index";
 
 export default class App extends Component {
   render() {

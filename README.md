@@ -1,12 +1,11 @@
 **Final design subject to change.**
 
-(No more Components will be shared, however screenshots will be available.)
 
-**Stages left:**
+**Stages Remaining:**
 
-1. (next) Create Workout Page.
+1. (next) Create individal exercise page.
 
-2. Save wrokout data and distribute it where needed.
+2. Create logic to save each specific exercises session data and distribute it where needed.
 
 3. Create Home modal page.
 
