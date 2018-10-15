@@ -5,7 +5,7 @@
 
 # dependencies
 /node_modules
-/src/components
+/client/containers/IsActiveScreen
 
 # misc
 .env
