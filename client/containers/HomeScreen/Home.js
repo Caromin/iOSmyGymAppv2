@@ -17,7 +17,7 @@ const Home = ({
         <View style={{ flexDirection: "row" }}>
           <TouchableHighlight
             onPress={() => {
-              const part = "Shoulder and Traps";
+              const part = "Shoulders and Traps";
               onPressed(part);
             }}
           >

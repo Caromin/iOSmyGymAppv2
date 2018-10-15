@@ -4,12 +4,7 @@ import { List, ListItem } from "react-native-elements";
 
 import global from "../../styles/styles";
 
-const IsActive = ({
-  status,
-  completedExercises,
-  totalCompletedSets,
-  onPressNav
-}) => {
+const IsActive = ({ status, onPressNav }) => {
   const list = status.list.map((obj, index) => (
     <ListItem
       key={index}
@@ -59,9 +54,7 @@ const IsActive = ({
             alignItems: "center"
           }}
         >
-          <Text style={{ color: "white" }}>
-            {totalCompletedSets} Completed Sets
-          </Text>
+          <Text style={{ color: "white" }}>Completed Sets</Text>
         </View>{" "}
         <View
           style={{
@@ -70,9 +63,7 @@ const IsActive = ({
             alignItems: "center"
           }}
         >
-          <Text style={{ color: "white" }}>
-            {completedExercises} Completed Exercises
-          </Text>
+          <Text style={{ color: "white" }}>Completed Exercises</Text>
         </View>
       </View>
       <View style={{ height: "60%", paddingTop: 10 }}>

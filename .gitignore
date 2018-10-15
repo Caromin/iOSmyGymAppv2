@@ -6,6 +6,7 @@
 # dependencies
 /node_modules
 /client/containers/IsActiveScreen
+/client/containers/HomeScreen
 
 # misc
 .env

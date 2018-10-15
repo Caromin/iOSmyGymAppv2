@@ -1,19 +1,26 @@
 **Final design subject to change.**
 
+**New Estimated Time: 16th Oct**
 
 **Stages Remaining:**
 
-1. (next) Create individal exercise page.
+~~1. Create individal exercise page.~~
 
-2. Create logic to save each specific exercises session data and distribute it where needed.
+~~2. Create logic to save each specific exercises session data and distribute it where needed.~~
 
-3. Create Home modal page.
+~~3. Create Home modal page.~~
 
 4. Fix conversion problems.
 
-5. Polish CSS.
+5. Polish CSS. (next)
 
 6. Prepare for deloyment.
+
+**House Keeping:**
+
+1. Combine asyncstorage functions into a helper component.
+
+2. 1-3 dozen Quality of Life issues.
 
 **Screens: From top left to bottom right**
 

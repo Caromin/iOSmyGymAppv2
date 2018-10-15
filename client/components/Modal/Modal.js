@@ -22,7 +22,6 @@ const Modal = ({
   specificWorkoutId,
   navigation
 }) => {
-  console.log("test", navigation);
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View

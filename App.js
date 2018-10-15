@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import store from "./client/store/store";
 
 // imported components
-import { Root } from "./client/index";
+import Root from "./client/index";
 
 export default class App extends Component {
   render() {

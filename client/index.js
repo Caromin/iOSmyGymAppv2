@@ -4,6 +4,12 @@ import {
   createBottomTabNavigator
 } from "react-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { AsyncStorage } from "react-native";
+import { connect } from "react-redux";
+import {
+  getLocalTotalAction,
+  getLocalExerciseAction
+} from "./containers/IsActiveScreen/Actions";
 
 import ModalContainer from "./components/Modal/Container";
 import HomeContainer from "./containers/HomeScreen/Container";
@@ -109,12 +115,34 @@ const RootStack = createStackNavigator(
   }
 );
 
-export class Root extends Component {
+class Root extends Component {
   constructor() {
     super();
+    this.getStorageProgram = this.getStorageProgram.bind(this);
   }
+
+  componentWillMount() {
+    this.getStorageProgram();
+  }
+
+  getStorageProgram = async () => {
+    await AsyncStorage.getItem("totalNumber").then(value => {
+      let parsedValue = parseInt(value);
+      value === null ? null : this.props.getLocalTotalAction(parsedValue);
+    });
+    await AsyncStorage.getItem("weeklyCompletedList").then(value => {
+      // console.log(JSON.parse(value));
+      let parsedObj = JSON.parse(value);
+      value === null ? null : this.props.getLocalExerciseAction(parsedObj);
+    });
+  };
 
   render() {
     return <RootStack />;
   }
 }
+
+export default connect(
+  null,
+  { getLocalTotalAction, getLocalExerciseAction }
+)(Root);

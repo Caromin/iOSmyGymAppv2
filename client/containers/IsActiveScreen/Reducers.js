@@ -1,4 +1,9 @@
-import { CHANGE_ACTIVE, COMPLETED_EXERCISE } from "./Actions";
+import {
+  CHANGE_ACTIVE,
+  COMPLETED_EXERCISE,
+  LOCAL_STORAGE_TOTAL,
+  LOCAL_STORAGE_EXERCISE
+} from "./Actions";
 
 export const inititalState = {
   isActive: false,
@@ -19,7 +24,16 @@ export default function(state = inititalState, action) {
         weeklyCompletedList: [...state.weeklyCompletedList, action.payload],
         completedWorkouts: state.completedWorkouts + 1
       };
-
+    case LOCAL_STORAGE_TOTAL:
+      return {
+        ...state,
+        completedWorkouts: action.payload
+      };
+    case LOCAL_STORAGE_EXERCISE:
+      return {
+        ...state,
+        weeklyCompletedList: action.payload
+      };
     default:
       return state;
   }

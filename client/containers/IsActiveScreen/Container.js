@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Alert } from "react-native";
+import { View, Alert, AsyncStorage } from "react-native";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
@@ -31,6 +31,7 @@ class IsActiveContainer extends Component {
     this.navigateToSingleExercise = this.navigateToSingleExercise.bind(this);
     this.updateList = this.updateList.bind(this);
     this.submitToReducer = this.submitToReducer.bind(this);
+    this.setStorageProgram = this.setStorageProgram.bind(this);
   }
 
   componentDidMount() {
@@ -39,12 +40,20 @@ class IsActiveContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    this.setStorageProgram();
     let pendingObj = nextProps.navigation.state.params.pendingObj;
 
     if (nextProps.navigation.state.params.isPending) {
       this.updateList(pendingObj);
     }
   }
+
+  setStorageProgram = async () => {
+    const parsedList = JSON.stringify(this.props.weeklyCompletedList);
+    const totalNumber = JSON.stringify(this.props.completeWorkouts);
+    await AsyncStorage.setItem("weeklyCompletedList", parsedList);
+    await AsyncStorage.setItem("totalNumber", totalNumber);
+  };
 
   submitToReducer = () => {
     let completedWorkoutObj = {
@@ -63,7 +72,7 @@ class IsActiveContainer extends Component {
         onPress: async () => {
           await this.props.submitCompletionAction(completedWorkoutObj),
             await this.props.isActiveAction(false);
-          await this.props.navigation.goBack();
+          await await this.props.navigation.goBack();
         }
       }
     ]);
@@ -150,8 +159,6 @@ class IsActiveContainer extends Component {
         <IsActive
           navigation={navigation}
           status={this.state}
-          totalCompletedSets={this.props.totalCompletedSets}
-          completedExercises={this.props.completedExercises}
           onPressNav={this.navigateToSingleExercise}
         />
         <SaveButton onPress={this.submitToReducer}>Finish</SaveButton>
@@ -162,14 +169,14 @@ class IsActiveContainer extends Component {
 
 IsActiveContainer.propTypes = {
   isActiveProp: PropTypes.bool,
-  totalCompletedSets: PropTypes.number,
-  completedExercises: PropTypes.number
+  weeklyCompletedList: PropTypes.array,
+  completeWorkouts: PropTypes.number
 };
 
 const mapStateToProps = state => ({
   isActiveProp: state.isActiveReducer.isActive,
-  totalCompletedSets: state.isActiveReducer.totalCompletedSets,
-  completedExercises: state.isActiveReducer.completedExercises
+  weeklyCompletedList: state.isActiveReducer.weeklyCompletedList,
+  completeWorkouts: state.isActiveReducer.completedWorkouts
 });
 
 export default connect(
