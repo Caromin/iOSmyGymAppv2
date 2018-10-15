@@ -28,7 +28,12 @@ class HomeContainer extends Component {
   };
 
   render() {
-    const { weightId, personalWeight, caloriesBurned } = this.props;
+    const {
+      weightId,
+      personalWeight,
+      caloriesBurned,
+      totalWorkouts
+    } = this.props;
     return (
       <View style={{ paddingTop: 10, flex: 1 }}>
         <Home
@@ -36,6 +41,7 @@ class HomeContainer extends Component {
           weightId={weightId}
           personalWeight={personalWeight}
           caloriesBurned={caloriesBurned}
+          totalWorkouts={totalWorkouts}
         />
       </View>
     );
@@ -45,13 +51,15 @@ class HomeContainer extends Component {
 HomeContainer.propTypes = {
   weightId: PropTypes.string,
   personalWeight: PropTypes.number,
-  caloriesBurned: PropTypes.number
+  caloriesBurned: PropTypes.number,
+  totalWorkouts: PropTypes.number
 };
 
 const mapStateToProps = state => ({
   weightId: state.settingsReducer.profile.weightId,
   personalWeight: state.settingsReducer.profile.weight,
-  caloriesBurned: state.settingsReducer.profile.caloriesBurned
+  caloriesBurned: state.settingsReducer.profile.caloriesBurned,
+  totalWorkouts: state.isActiveReducer.completedWorkouts
 });
 
 export default connect(mapStateToProps)(HomeContainer);

@@ -38,15 +38,14 @@ class SingleExerciseContainer extends Component {
 
   componentWillMount() {
     let replaceList = this.props.navigation.getParam("persistingList");
-    console.log("specific index: ", this.state.specificExerciseIndex);
     if (replaceList.length !== 0) {
-      replaceList.find(index => {
+      const test = replaceList.find(index => {
         if (this.state.specificExerciseIndex === index.indexRef) {
-          console.log("index: ", index);
           this.showPersistingData(index);
           return true;
         }
       });
+      test === undefined ? this.addNewSet() : null;
     } else {
       this.addNewSet();
     }
@@ -103,14 +102,16 @@ class SingleExerciseContainer extends Component {
     await this.setState({
       pendingSaveList: [...this.state.pendingSaveList, obj]
     });
-    // await console.log(this.state.pendingSaveList);
   };
 
   submitToPending = () => {
     let pendingObj = {
       pendingList: this.state.pendingSaveList,
-      indexRef: this.state.specificExerciseIndex
+      indexRef: this.state.specificExerciseIndex,
+      title: this.state.objInfo.title,
+      muscleGroup: this.state.objInfo.muscleGroup
     };
+
     this.props.navigation.navigate("IsActive", {
       isPending: true,
       pendingObj

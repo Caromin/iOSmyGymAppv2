@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, Alert } from "react-native";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import IsActive from "./IsActive";
 import CancelButton from "../../components/Buttons/Headers/Cancel";
 import SaveButton from "../../components/Buttons/Save";
-import { isActiveAction } from "./Actions";
+import { isActiveAction, submitCompletionAction } from "./Actions";
 
 class IsActiveContainer extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -24,11 +24,13 @@ class IsActiveContainer extends Component {
       currentSeconds: 0,
       currentMinutes: 0,
       currentHours: 0,
-      pendingCompletedList: []
+      pendingCompletedList: [],
+      pendingNameAndGroup: []
     };
     this.displayTime = this.displayTime.bind(this);
     this.navigateToSingleExercise = this.navigateToSingleExercise.bind(this);
     this.updateList = this.updateList.bind(this);
+    this.submitToReducer = this.submitToReducer.bind(this);
   }
 
   componentDidMount() {
@@ -38,10 +40,34 @@ class IsActiveContainer extends Component {
 
   componentWillReceiveProps(nextProps) {
     let pendingObj = nextProps.navigation.state.params.pendingObj;
+
     if (nextProps.navigation.state.params.isPending) {
       this.updateList(pendingObj);
     }
   }
+
+  submitToReducer = () => {
+    let completedWorkoutObj = {
+      list: this.state.pendingNameAndGroup,
+      dateToRemove: Date.now() + 7 * 24 * 60 * 60 * 1000
+    };
+
+    Alert.alert("Complete Workout", "Are you finished with your workout?", [
+      {
+        text: "Cancel",
+        onPress: () => null,
+        style: "cancel"
+      },
+      {
+        text: "Finish",
+        onPress: async () => {
+          await this.props.submitCompletionAction(completedWorkoutObj),
+            await this.props.isActiveAction(false);
+          await this.props.navigation.goBack();
+        }
+      }
+    ]);
+  };
 
   updateList = pendingObj => {
     let isEdited = false;
@@ -63,11 +89,30 @@ class IsActiveContainer extends Component {
     });
 
     comparedList.then(data => {
-      isEdited
-        ? this.setState({ pendingCompletedList: data })
-        : this.setState({
-            pendingCompletedList: [...this.state.pendingCompletedList, data]
-          });
+      if (isEdited) {
+        let completeNewArr = data.map(index => {
+          let nameAndGroup = {
+            title: index.title,
+            muscleGroup: index.muscleGroup
+          };
+          return nameAndGroup;
+        });
+        this.setState({ pendingCompletedList: data });
+        this.setState({
+          pendingNameAndGroup: completeNewArr
+        });
+      } else {
+        let newObj = {
+          title: data.title,
+          muscleGroup: data.muscleGroup
+        };
+        this.setState({
+          pendingCompletedList: [...this.state.pendingCompletedList, data]
+        });
+        this.setState({
+          pendingNameAndGroup: [...this.state.pendingNameAndGroup, newObj]
+        });
+      }
     });
   };
 
@@ -91,7 +136,6 @@ class IsActiveContainer extends Component {
   };
 
   navigateToSingleExercise = (obj, index) => {
-    // console.log("this is the specific obj: ", obj);
     this.props.navigation.navigate("SingleExercise", {
       obj,
       index,
@@ -110,8 +154,7 @@ class IsActiveContainer extends Component {
           completedExercises={this.props.completedExercises}
           onPressNav={this.navigateToSingleExercise}
         />
-        {/* onpress still needed below */}
-        <SaveButton>Finish</SaveButton>
+        <SaveButton onPress={this.submitToReducer}>Finish</SaveButton>
       </View>
     );
   }
@@ -131,5 +174,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { isActiveAction }
+  { isActiveAction, submitCompletionAction }
 )(IsActiveContainer);

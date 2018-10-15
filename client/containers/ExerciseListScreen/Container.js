@@ -106,6 +106,7 @@ class ExerciseListContainer extends Component {
   startWorkout = () => {
     this.props.navigation.navigate("IsActive", {
       workoutTitle: this.state.workoutTitle,
+      workoutId: this.state.workoutId,
       list: this.state.list
     });
   };

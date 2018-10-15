@@ -4,7 +4,13 @@ import { View, Image, TouchableHighlight } from "react-native";
 import DisplayStats from "./DisplayStats";
 
 // if stateless function pass props via object brackets {} to access
-const Home = ({ onPressed, weightId, personalWeight, caloriesBurned }) => {
+const Home = ({
+  onPressed,
+  weightId,
+  personalWeight,
+  caloriesBurned,
+  totalWorkouts
+}) => {
   return (
     <View style={{ flex: 1, paddingTop: 20 }}>
       <View style={{ alignItems: "center", flexDirection: "column" }}>
@@ -208,9 +214,9 @@ const Home = ({ onPressed, weightId, personalWeight, caloriesBurned }) => {
         <DisplayStats stat={personalWeight} id={weightId}>
           Current Weight:
         </DisplayStats>
-        <DisplayStats>Total Workouts:</DisplayStats>
+        <DisplayStats stat={totalWorkouts}>Total Workouts:</DisplayStats>
         <DisplayStats stat={caloriesBurned}>Calories Burned:</DisplayStats>
-        <DisplayStats>Personal Bests:</DisplayStats>
+        <DisplayStats>Weekly Bests:</DisplayStats>
       </View>
     </View>
   );
