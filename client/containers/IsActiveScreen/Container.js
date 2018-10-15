@@ -23,16 +23,53 @@ class IsActiveContainer extends Component {
       saveResults: true,
       currentSeconds: 0,
       currentMinutes: 0,
-      currentHours: 0
+      currentHours: 0,
+      pendingCompletedList: []
     };
     this.displayTime = this.displayTime.bind(this);
-    this.addToPendingArr = this.addToPendingArr.bind(this);
+    this.navigateToSingleExercise = this.navigateToSingleExercise.bind(this);
+    this.updateList = this.updateList.bind(this);
   }
 
   componentDidMount() {
     this.props.isActiveAction(true);
     this.displayTime();
   }
+
+  componentWillReceiveProps(nextProps) {
+    let pendingObj = nextProps.navigation.state.params.pendingObj;
+    if (nextProps.navigation.state.params.isPending) {
+      this.updateList(pendingObj);
+    }
+  }
+
+  updateList = pendingObj => {
+    let isEdited = false;
+
+    let comparedList = new Promise(resolve => {
+      if (this.state.pendingCompletedList.length > 0) {
+        let checkList = this.state.pendingCompletedList.map(obj => {
+          if (obj.indexRef === pendingObj.indexRef) {
+            isEdited = true;
+            return pendingObj;
+          } else {
+            return obj;
+          }
+        });
+        !isEdited ? resolve(pendingObj) : resolve(checkList);
+      } else {
+        resolve(pendingObj);
+      }
+    });
+
+    comparedList.then(data => {
+      isEdited
+        ? this.setState({ pendingCompletedList: data })
+        : this.setState({
+            pendingCompletedList: [...this.state.pendingCompletedList, data]
+          });
+    });
+  };
 
   displayTime = () => {
     setInterval(() => {
@@ -53,8 +90,13 @@ class IsActiveContainer extends Component {
     }, 1000);
   };
 
-  addToPendingArr = (obj, totalSet) => {
-    console.log(obj);
+  navigateToSingleExercise = (obj, index) => {
+    // console.log("this is the specific obj: ", obj);
+    this.props.navigation.navigate("SingleExercise", {
+      obj,
+      index,
+      persistingList: this.state.pendingCompletedList
+    });
   };
 
   render() {
@@ -64,10 +106,11 @@ class IsActiveContainer extends Component {
         <IsActive
           navigation={navigation}
           status={this.state}
-          pendingCompletedList={this.props.pendingCompletedList}
           totalCompletedSets={this.props.totalCompletedSets}
           completedExercises={this.props.completedExercises}
+          onPressNav={this.navigateToSingleExercise}
         />
+        {/* onpress still needed below */}
         <SaveButton>Finish</SaveButton>
       </View>
     );
@@ -76,14 +119,12 @@ class IsActiveContainer extends Component {
 
 IsActiveContainer.propTypes = {
   isActiveProp: PropTypes.bool,
-  pendingCompletedList: PropTypes.array,
   totalCompletedSets: PropTypes.number,
   completedExercises: PropTypes.number
 };
 
 const mapStateToProps = state => ({
   isActiveProp: state.isActiveReducer.isActive,
-  pendingCompletedList: state.isActiveReducer.pendingCompletedList,
   totalCompletedSets: state.isActiveReducer.totalCompletedSets,
   completedExercises: state.isActiveReducer.completedExercises
 });

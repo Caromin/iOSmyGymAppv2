@@ -4,7 +4,7 @@ export const inititalState = {
   isActive: false,
   completedExercises: 0,
   totalCompletedSets: 0,
-  pendingCompletedList: []
+  weeklyCompletedList: []
 };
 
 export default function(state = inititalState, action) {

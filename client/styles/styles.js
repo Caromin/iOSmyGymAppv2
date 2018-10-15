@@ -66,6 +66,12 @@ const global = EStyleSheet.create({
     borderWidth: 1,
     borderColor: "black",
     borderStyle: "solid"
+  },
+  defaultSingleExercise: {
+    width: "50%",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row"
   }
 });
 

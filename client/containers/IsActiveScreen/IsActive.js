@@ -5,23 +5,21 @@ import { List, ListItem } from "react-native-elements";
 import global from "../../styles/styles";
 
 const IsActive = ({
-  navigation,
   status,
   completedExercises,
   totalCompletedSets,
-  pendingCompletedList
+  onPressNav
 }) => {
-  const list = status.list.map(obj => (
+  const list = status.list.map((obj, index) => (
     <ListItem
-      key={obj.directId}
+      key={index}
       roundAvatar
       avatar={obj.avatarURL}
       title={obj.title}
-      subtitle={obj.description}
+      subtitle={`${obj.estimatedTime} mins`}
       subtitleStyle={global.defaultListItem}
       onPress={() => {
-        // console.log("hello world", obj);
-        navigation.navigate("SingleExercise", { obj: obj });
+        onPressNav(obj, index);
       }}
     />
   ));
