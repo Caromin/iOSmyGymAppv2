@@ -120,7 +120,7 @@ const MainStack = createMaterialBottomTabNavigator(
     }
   },
   {
-    initialRouteName: "Settings",
+    initialRouteName: "Home",
     order: ["Programs", "Home", "Settings"],
     shifting: true,
     activeTintColor: "#fff",
@@ -156,6 +156,19 @@ class Root extends Component {
 
   getStorageProgram = () => {
     AsyncStorage.getItem("settings").then(value => {
+      const checkerArr = [
+        "Shoulders and Traps",
+        "Biceps",
+        "Chest",
+        "Triceps",
+        "Back",
+        "Forearms",
+        "Glutes",
+        "Abdominals",
+        "Quads",
+        "Hamstrings",
+        "Calves"
+      ];
       const completedList = JSON.parse(value);
       this.props.localSettingsAction(completedList);
     });
@@ -164,7 +177,7 @@ class Root extends Component {
       value === null ? null : this.props.getLocalTotalAction(parsedValue);
     });
     AsyncStorage.getItem("weeklyCompletedList").then(value => {
-      // console.log(JSON.parse(value));
+      console.log(JSON.parse(value));
       let parsedObj = JSON.parse(value);
       value === null ? null : this.props.getLocalExerciseAction(parsedObj);
     });

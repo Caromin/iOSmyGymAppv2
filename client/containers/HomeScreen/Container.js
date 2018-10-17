@@ -34,7 +34,8 @@ class HomeContainer extends Component {
       personalWeight,
       caloriesBurned,
       totalWorkouts,
-      weightChange
+      weightChange,
+      workoutCounts
     } = this.props;
     return (
       <View style={[global.blackBackground, { paddingTop: 10, flex: 1 }]}>
@@ -45,6 +46,7 @@ class HomeContainer extends Component {
           personalWeight={personalWeight}
           caloriesBurned={caloriesBurned}
           totalWorkouts={totalWorkouts}
+          workoutCounts={workoutCounts}
         />
       </View>
     );
@@ -64,7 +66,8 @@ const mapStateToProps = state => ({
   weightChange: state.settingsReducer.profile.weightDifference,
   personalWeight: state.settingsReducer.profile.weight,
   caloriesBurned: state.settingsReducer.profile.caloriesBurned,
-  totalWorkouts: state.isActiveReducer.completedWorkouts
+  totalWorkouts: state.isActiveReducer.completedWorkouts,
+  workoutCounts: state.homeReducer
 });
 
 export default connect(mapStateToProps)(HomeContainer);
