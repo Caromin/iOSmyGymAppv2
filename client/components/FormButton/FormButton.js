@@ -6,17 +6,10 @@ import global from "../../styles/styles";
 
 export default class FormButtonGroup extends Component {
   render() {
-    const {
-      onPress,
-      importStyle,
-      id,
-      buttons,
-      activeStatus,
-      children
-    } = this.props;
+    const { onPress, id, buttons, activeStatus, children } = this.props;
     return (
       <View style={global.defaultFormMargin}>
-        <Text style={global.defaultText}>{children}</Text>
+        <Text style={global.defaultWhiteText}>{children}</Text>
         <ButtonGroup
           buttons={buttons}
           // this is to show which index is active
@@ -25,7 +18,8 @@ export default class FormButtonGroup extends Component {
             let actionId = buttons[value];
             onPress(id, value, actionId);
           }}
-          selectedButtonStyle={importStyle}
+          selectedButtonStyle={global.purpleBackground}
+          selectedTextStyle={{ color: "#fff" }}
         />
       </View>
     );

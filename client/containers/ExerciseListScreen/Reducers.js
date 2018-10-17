@@ -41,7 +41,6 @@ export const inititalState = {
 export default function(state = inititalState, action) {
   switch (action.type) {
     case REFRESH_FROM_LOCALSTORAGE:
-      // console.log(action.payload);
       return {
         ...state,
         exerciseArr: action.payload
@@ -87,7 +86,6 @@ export default function(state = inititalState, action) {
         }
         return index;
       });
-      // console.log("after removed: ", removeSameId);
       return {
         ...state,
         exerciseArr: removeSameId
@@ -106,7 +104,6 @@ export default function(state = inititalState, action) {
         }
         return index;
       });
-      // console.log("new array: ", reorderArr);
       return {
         ...state,
         exerciseArr: reorderArr

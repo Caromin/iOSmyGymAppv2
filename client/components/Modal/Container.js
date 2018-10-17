@@ -138,7 +138,6 @@ class ModalContainer extends Component {
               : difficulty,
         workouts: isEdit ? targetedObj.workouts : []
       };
-      console.log(data);
       isEdit && createProgram
         ? editProgramAction(data)
         : createProgram

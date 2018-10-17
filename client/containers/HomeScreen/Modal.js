@@ -20,9 +20,6 @@ class HomeModal extends Component {
   }
 
   updateState = () => {
-    console.log("test: ", this.props.completeList);
-    console.log("test: ", this.props.selectedBodyPart);
-
     let pendingArr = [];
     const createArr = new Promise(resolve => {
       this.props.completeList.forEach(index => {

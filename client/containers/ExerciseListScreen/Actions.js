@@ -5,7 +5,6 @@ export const REORDER_LIST = "REORDER_LIST";
 export const CHANGE_ACTIVE = "CHANGE_ACTIVE";
 
 export const addExerciseAction = data => dispatch => {
-  // console.log("inside actions: ", data.list);
   data.list.length === 0
     ? null
     : dispatch({
@@ -23,7 +22,6 @@ export const removeExerciseAction = (objDirectId, workoutId) => dispatch => {
 };
 
 export const refreshReduxAction = data => dispatch => {
-  // console.log("inaction: ", data);
   dispatch({
     type: REFRESH_FROM_LOCALSTORAGE,
     payload: data

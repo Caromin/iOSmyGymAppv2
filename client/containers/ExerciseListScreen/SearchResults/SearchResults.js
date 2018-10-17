@@ -6,10 +6,6 @@ import { List, ListItem } from "react-native-elements";
 import global from "../../../styles/styles";
 
 const SearchResults = ({ state, saveDataToWorkout }) => {
-  difficultyColor = () => {
-    console.log("hi");
-  };
-
   const postItems = state.resultsArr.map(obj => (
     <ListItem
       key={uuidv1()}

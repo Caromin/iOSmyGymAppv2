@@ -18,7 +18,7 @@ export default class FormInputGroup extends Component {
     } = this.props;
     return (
       <View style={global.defaultFormMargin}>
-        <Text style={global.defaultText}>{children}</Text>
+        <Text style={global.defaultWhiteText}>{children}</Text>
         <FormInput
           keyboardType={"numeric"}
           maxLength={maxLength}
@@ -29,6 +29,11 @@ export default class FormInputGroup extends Component {
               ? updateErrMsgFunc(id, true)
               : updateErrMsgFunc(id, false);
             onPress(id, value);
+          }}
+          containerStyle={{
+            backgroundColor: "#fff",
+            marginTop: 5,
+            paddingLeft: 10
           }}
         />
         {errorMsg ? (

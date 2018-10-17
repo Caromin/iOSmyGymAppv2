@@ -28,10 +28,6 @@ class ExerciseModal extends Component {
     this.callAction = this.callAction.bind(this);
   }
 
-  componentDidUpdate() {
-    // console.log(this.state.pendingSavedArr);
-  }
-
   removeFromArr = obj => {
     let tempArr = this.state.pendingSavedArr;
     const arrPromise = new Promise(resolve => {

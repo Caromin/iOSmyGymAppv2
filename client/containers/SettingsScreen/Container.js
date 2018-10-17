@@ -6,8 +6,8 @@ import PropTypes from "prop-types";
 import { AsyncStorage } from "react-native";
 
 import Settings from "./Settings";
-// remember to use this.props
 import { settingsAction, localSettingsAction } from "./Actions";
+import global from "../../styles/styles";
 
 class SettingsContainer extends Component {
   static navigationOptions = {
@@ -33,12 +33,32 @@ class SettingsContainer extends Component {
     this.saveInputsFunc = this.saveInputsFunc.bind(this);
     this.updateSettingsFunc = this.updateSettingsFunc.bind(this);
     this.setStorageSettingFunc = this.setStorageSettingFunc.bind(this);
-    this.getStorageSettingFunc = this.getStorageSettingFunc.bind(this);
   }
 
-  componentWillMount() {
-    this.getStorageSettingFunc();
-  }
+  componentWillMount = async () => {
+    // MINOR ISSUE: IF SET TO INITIAL ROUTE THE PROPS DON'T UPDATE AND USE DEFAULT FROM INDEX.JS
+    // HAD TO RECALL HERE BEFORE I SET THE STATES
+    await AsyncStorage.getItem("settings").then(value => {
+      const completedList = JSON.parse(value);
+      console.log(completedList);
+      this.props.localSettingsAction(completedList);
+    });
+
+    await this.setState({ weight: this.props.personalWeight });
+    await this.setState({ calories: this.props.caloriesBurned });
+    await this.setState({
+      activeButtons: {
+        ...this.state.activeButtons,
+        distanceBtn: this.props.distanceBtn
+      }
+    });
+    await this.setState({
+      activeButtons: {
+        ...this.state.activeButtons,
+        weightBtn: this.props.weightBtn
+      }
+    });
+  };
 
   componentWillUpdate() {
     this.props.isFocused ? null : this.setState({ successAlert: false });
@@ -47,28 +67,6 @@ class SettingsContainer extends Component {
   setStorageSettingFunc = async () => {
     const parsedList = JSON.stringify(this.props.settingList);
     await AsyncStorage.setItem("settings", parsedList);
-  };
-
-  getStorageSettingFunc = async () => {
-    await AsyncStorage.getItem("settings").then(value => {
-      const completedList = JSON.parse(value);
-      this.props.localSettingsAction(completedList);
-      // must be used because this.state is loading before I can update the redux via mount
-      this.setState({ weight: completedList.weight });
-      this.setState({ calories: completedList.caloriesBurned });
-      this.setState({
-        activeButtons: {
-          ...this.state.activeButtons,
-          distanceBtn: completedList.distanceBtn
-        }
-      });
-      this.setState({
-        activeButtons: {
-          ...this.state.activeButtons,
-          weightBtn: completedList.weightBtn
-        }
-      });
-    });
   };
 
   saveInputsFunc = async () => {
@@ -122,7 +120,7 @@ class SettingsContainer extends Component {
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
+      <View style={[{ flex: 1 }, global.blackBackground]}>
         <Settings
           updateSettingsFunc={this.updateSettingsFunc}
           updateErrMsgFunc={this.updateErrMsgFunc}

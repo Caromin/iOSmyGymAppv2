@@ -3,15 +3,22 @@ import EStyleSheet from "react-native-extended-stylesheet";
 // cannot create premade objects, only variables
 // always call EStyleSheet.build() even if you don't use global variables!
 EStyleSheet.build({
-  $defaultMainColor: "#000",
+  $defaultMainColor: "#0e1111",
   $defaultGreen: "#5cb85c",
-  $defaultRed: "#d9534f",
+  $defaultRed: "#D63D41",
   $defaultBlue: "#337ab7",
-  $defaultGold: "#FFDF00"
+  $defaultGold: "#FFD700"
   // $outline: 1
 });
 
 const global = EStyleSheet.create({
+  defaultWhiteText: {
+    textAlign: "justify",
+    fontSize: 16,
+    color: "white",
+    paddingLeft: 10,
+    fontWeight: "500"
+  },
   defaultText: {
     textAlign: "justify",
     fontSize: 16,
@@ -31,8 +38,11 @@ const global = EStyleSheet.create({
   blueBackground: {
     backgroundColor: "$defaultBlue"
   },
-  yellowBackground: {
-    backgroundColor: "$defaultGold"
+  purpleBackground: {
+    backgroundColor: "#67013A"
+  },
+  blackBackground: {
+    backgroundColor: "#0e1111"
   },
   defaultScrollView: {
     height: "80%",
@@ -72,6 +82,13 @@ const global = EStyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "row"
+  },
+  shadow: {
+    fontSize: 15,
+    fontFamily: "Helvetica",
+    textShadowColor: "#585858",
+    textShadowOffset: { width: 1, height: 1.5 },
+    textShadowRadius: 1
   }
 });
 

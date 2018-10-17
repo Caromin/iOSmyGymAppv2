@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import Home from "./Home";
+import global from "../../styles/styles";
 
 class HomeContainer extends Component {
   // can be a static object, used function instead to be about to used objects like navigation
@@ -32,13 +33,15 @@ class HomeContainer extends Component {
       weightId,
       personalWeight,
       caloriesBurned,
-      totalWorkouts
+      totalWorkouts,
+      weightChange
     } = this.props;
     return (
-      <View style={{ paddingTop: 10, flex: 1 }}>
+      <View style={[global.blackBackground, { paddingTop: 10, flex: 1 }]}>
         <Home
           onPressed={this.selectedBodyPart}
           weightId={weightId}
+          weightChange={weightChange}
           personalWeight={personalWeight}
           caloriesBurned={caloriesBurned}
           totalWorkouts={totalWorkouts}
@@ -50,6 +53,7 @@ class HomeContainer extends Component {
 
 HomeContainer.propTypes = {
   weightId: PropTypes.string,
+  weightChange: PropTypes.number,
   personalWeight: PropTypes.number,
   caloriesBurned: PropTypes.number,
   totalWorkouts: PropTypes.number
@@ -57,6 +61,7 @@ HomeContainer.propTypes = {
 
 const mapStateToProps = state => ({
   weightId: state.settingsReducer.profile.weightId,
+  weightChange: state.settingsReducer.profile.weightDifference,
   personalWeight: state.settingsReducer.profile.weight,
   caloriesBurned: state.settingsReducer.profile.caloriesBurned,
   totalWorkouts: state.isActiveReducer.completedWorkouts

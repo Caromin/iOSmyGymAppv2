@@ -51,7 +51,6 @@ class ExerciseListContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log("on receive props: ", nextProps.exerciseList);
     this.updateState(nextProps);
   }
 
@@ -95,11 +94,7 @@ class ExerciseListContainer extends Component {
       resolve();
     });
     wait.then(() => {
-      if (arrToState === null) {
-        console.log("arrto state is null");
-      } else {
-        this.setState({ list: arrToState });
-      }
+      arrToState === null ? null : this.setState({ list: arrToState });
     });
   };
 

@@ -1,15 +1,10 @@
 import React, { Component } from "react";
-import {
-  createStackNavigator,
-  createBottomTabNavigator
-} from "react-navigation";
+import { createStackNavigator } from "react-navigation";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import MaterialIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { AsyncStorage } from "react-native";
 import { connect } from "react-redux";
-import {
-  getLocalTotalAction,
-  getLocalExerciseAction
-} from "./containers/IsActiveScreen/Actions";
+import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 
 import ModalContainer from "./components/Modal/Container";
 import HomeContainer from "./containers/HomeScreen/Container";
@@ -19,25 +14,32 @@ import WorkoutContainer from "./containers/ProgramScreen/WorkoutContainer";
 import ExerciseListContainer from "./containers/ExerciseListScreen/Container";
 import IsActiveContainer from "./containers/IsActiveScreen/Container";
 import SingleExerciseContainer from "./containers/IsActiveScreen/SingleExercise";
-
-const options = {
-  navigationOptions: {
-    headerStyle: {
-      backgroundColor: "#f4511e"
-    },
-    headerTintColor: "#000",
-    headerTitleStyle: {
-      fontWeight: "bold"
-    }
-  }
-};
+import {
+  getLocalTotalAction,
+  getLocalExerciseAction
+} from "./containers/IsActiveScreen/Actions";
+import { localSettingsAction } from "./containers/SettingsScreen/Actions";
 
 // seperate stack of 'cards' for each of the tab navigator
 const HomeStack = createStackNavigator(
   {
     Home: HomeContainer
   },
-  options
+  {
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: "#D63D41"
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        fontSize: 24,
+        fontFamily: "Helvetica",
+        textShadowColor: "black",
+        textShadowOffset: { width: 3, height: 2 },
+        textShadowRadius: 1
+      }
+    }
+  }
 );
 
 const ProgramStack = createStackNavigator(
@@ -48,54 +50,81 @@ const ProgramStack = createStackNavigator(
     IsActive: IsActiveContainer,
     SingleExercise: SingleExerciseContainer
   },
-  options
+  {
+    navigationOptions: {
+      headerStyle: {
+        backgroundColor: "#C2AB82"
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        fontSize: 24,
+        fontFamily: "Helvetica",
+        textShadowColor: "black",
+        textShadowOffset: { width: 3, height: 2 },
+        textShadowRadius: 1
+      }
+    }
+  }
 );
 
 const SettingsStack = createStackNavigator(
   {
     Settings: SettingsContainer
   },
-  options
-);
-
-// each stack is one tab point
-const MainStack = createBottomTabNavigator(
   {
-    Programs: ProgramStack,
-    Home: HomeStack,
-    Settings: SettingsStack
-  },
-  {
-    navigationOptions: ({ navigation }) => ({
-      initialRouteName: "Home",
+    navigationOptions: {
       headerStyle: {
-        backgroundColor: "#f4511e"
+        backgroundColor: "#67013A"
       },
       headerTintColor: "#fff",
       headerTitleStyle: {
-        fontWeight: "bold"
-      },
-      tabBarIcon: ({ focused, tintColor }) => {
-        const { routeName } = navigation.state;
-        let iconName;
-        // requires outline because of the focus/active object
-        if (routeName === "Home") {
-          iconName = `ios-information-circle${focused ? "" : "-outline"}`;
-        } else if (routeName === "Settings") {
-          iconName = `ios-options${focused ? "" : "-outline"}`;
-        } else if (routeName === "Programs") {
-          iconName = `ios-star${focused ? "" : "-outline"}`;
-        }
-
-        // You can return any component that you like here! We usually use an
-        // icon component from react-native-vector-icons
-        return <Ionicons name={iconName} size={25} color={tintColor} />;
+        fontSize: 24,
+        fontFamily: "Helvetica",
+        textShadowColor: "black",
+        textShadowOffset: { width: 3, height: 2 },
+        textShadowRadius: 1
       }
-    }),
-    tabBarOptions: {
-      activeTintColor: "#f4511e",
-      inactiveTintColor: "#000000"
     }
+  }
+);
+
+// each stack is one tab point
+const MainStack = createMaterialBottomTabNavigator(
+  {
+    Home: {
+      screen: HomeStack,
+      navigationOptions: {
+        tabBarColor: "#D63D41",
+        tabBarIcon: ({ tintColor }) => (
+          <Ionicons name="ios-home" color={tintColor} size={24} />
+        )
+      }
+    },
+    Programs: {
+      screen: ProgramStack,
+      navigationOptions: {
+        tabBarColor: "#C2AB82",
+        tabBarIcon: ({ tintColor }) => (
+          <MaterialIcons name="dumbbell" color={tintColor} size={24} />
+        )
+      }
+    },
+    Settings: {
+      screen: SettingsStack,
+      navigationOptions: {
+        tabBarColor: "#67013A",
+        tabBarIcon: ({ tintColor }) => (
+          <Ionicons name="md-settings" color={tintColor} size={24} />
+        )
+      }
+    }
+  },
+  {
+    initialRouteName: "Settings",
+    order: ["Programs", "Home", "Settings"],
+    shifting: true,
+    activeTintColor: "#fff",
+    inactiveTintColor: "#000"
   }
 );
 
@@ -125,12 +154,16 @@ class Root extends Component {
     this.getStorageProgram();
   }
 
-  getStorageProgram = async () => {
-    await AsyncStorage.getItem("totalNumber").then(value => {
+  getStorageProgram = () => {
+    AsyncStorage.getItem("settings").then(value => {
+      const completedList = JSON.parse(value);
+      this.props.localSettingsAction(completedList);
+    });
+    AsyncStorage.getItem("totalNumber").then(value => {
       let parsedValue = parseInt(value);
       value === null ? null : this.props.getLocalTotalAction(parsedValue);
     });
-    await AsyncStorage.getItem("weeklyCompletedList").then(value => {
+    AsyncStorage.getItem("weeklyCompletedList").then(value => {
       // console.log(JSON.parse(value));
       let parsedObj = JSON.parse(value);
       value === null ? null : this.props.getLocalExerciseAction(parsedObj);
@@ -144,5 +177,5 @@ class Root extends Component {
 
 export default connect(
   null,
-  { getLocalTotalAction, getLocalExerciseAction }
+  { getLocalTotalAction, getLocalExerciseAction, localSettingsAction }
 )(Root);

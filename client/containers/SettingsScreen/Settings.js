@@ -6,7 +6,6 @@ import FormButtonGroup from "../../components/FormButton/FormButton";
 import FormInputGroup from "../../components/FormInput/FormInput";
 import SaveButton from "../../components/Buttons/Save";
 import styles from "./Styles";
-import global from "../../styles/styles";
 
 export default class Settings extends Component {
   render() {
@@ -38,7 +37,6 @@ export default class Settings extends Component {
               buttons={distanceButtons}
               id={"distanceBtn"}
               onPress={this.props.updateSettingsFunc}
-              importStyle={global.redBackground}
               activeStatus={activeButtons.distanceBtn}
             >
               Distance:
@@ -47,7 +45,6 @@ export default class Settings extends Component {
               buttons={weightButtons}
               id={"weightBtn"}
               onPress={this.props.updateSettingsFunc}
-              importStyle={global.redBackground}
               activeStatus={activeButtons.weightBtn}
             >
               Weight:
