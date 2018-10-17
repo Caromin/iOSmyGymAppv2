@@ -19,6 +19,7 @@ import {
   getLocalExerciseAction
 } from "./containers/IsActiveScreen/Actions";
 import { localSettingsAction } from "./containers/SettingsScreen/Actions";
+import { updateWeeklyTotals } from "./containers/HomeScreen/Actions";
 
 // seperate stack of 'cards' for each of the tab navigator
 const HomeStack = createStackNavigator(
@@ -156,19 +157,6 @@ class Root extends Component {
 
   getStorageProgram = () => {
     AsyncStorage.getItem("settings").then(value => {
-      const checkerArr = [
-        "Shoulders and Traps",
-        "Biceps",
-        "Chest",
-        "Triceps",
-        "Back",
-        "Forearms",
-        "Glutes",
-        "Abdominals",
-        "Quads",
-        "Hamstrings",
-        "Calves"
-      ];
       const completedList = JSON.parse(value);
       this.props.localSettingsAction(completedList);
     });
@@ -177,9 +165,28 @@ class Root extends Component {
       value === null ? null : this.props.getLocalTotalAction(parsedValue);
     });
     AsyncStorage.getItem("weeklyCompletedList").then(value => {
-      console.log(JSON.parse(value));
       let parsedObj = JSON.parse(value);
-      value === null ? null : this.props.getLocalExerciseAction(parsedObj);
+      let sortedArr = [];
+      let data = {};
+
+      console.log(parsedObj);
+      const createArr = new Promise(resolve => {
+        parsedObj.forEach(index => {
+          index.list.forEach(value => {
+            sortedArr.push(value.muscleGroup);
+          });
+        });
+        resolve();
+      });
+
+      createArr.then(async () => {
+        await sortedArr.forEach(value => {
+          let newValue = value.replace(/\s+/g, "");
+          data[newValue] = (data[newValue] || 0) + 1;
+        });
+        await this.props.updateWeeklyTotals(data);
+        value === null ? null : this.props.getLocalExerciseAction(parsedObj);
+      });
     });
   };
 
@@ -190,5 +197,10 @@ class Root extends Component {
 
 export default connect(
   null,
-  { getLocalTotalAction, getLocalExerciseAction, localSettingsAction }
+  {
+    getLocalTotalAction,
+    getLocalExerciseAction,
+    localSettingsAction,
+    updateWeeklyTotals
+  }
 )(Root);

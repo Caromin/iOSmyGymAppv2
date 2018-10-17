@@ -25,6 +25,9 @@ export default function(state = inititalState, action) {
         completedWorkouts: state.completedWorkouts + 1
       };
     case LOCAL_STORAGE_TOTAL:
+      if (action.payload === null) {
+        return { ...state };
+      }
       return {
         ...state,
         completedWorkouts: action.payload

@@ -1,7 +1,5 @@
 **Final design subject to change.**
 
-**New Estimated Time: 16th Oct**
-
 **Stages Remaining:**
 
 ~~1. Create individal exercise page.~~
@@ -10,7 +8,7 @@
 
 ~~3. Create Home modal page.~~
 
-4. Fix conversion problems.
+4. Fix conversion problems and other missing logic.
 
 5. Polish CSS. (next)
 

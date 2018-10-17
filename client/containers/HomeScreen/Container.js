@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, AsyncStorage } from "react-native";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 
 import Home from "./Home";
 import global from "../../styles/styles";
+import { updateWeeklyTotals } from "./Actions";
 
 class HomeContainer extends Component {
   // can be a static object, used function instead to be about to used objects like navigation
@@ -19,7 +20,39 @@ class HomeContainer extends Component {
     };
 
     this.selectedBodyPart = this.selectedBodyPart.bind(this);
+    this.updateSelected = this.updateSelected.bind(this);
   }
+
+  componentWillReceiveProps() {
+    this.updateSelected();
+  }
+
+  updateSelected = () => {
+    AsyncStorage.getItem("weeklyCompletedList") === null
+      ? null
+      : AsyncStorage.getItem("weeklyCompletedList").then(value => {
+          let parsedObj = JSON.parse(value);
+          let sortedArr = [];
+          let data = {};
+
+          const createArr = new Promise(resolve => {
+            parsedObj.forEach(index => {
+              index.list.forEach(value => {
+                sortedArr.push(value.muscleGroup);
+              });
+            });
+            resolve();
+          });
+
+          createArr.then(async () => {
+            await sortedArr.forEach(value => {
+              let newValue = value.replace(/\s+/g, "");
+              data[newValue] = (data[newValue] || 0) + 1;
+            });
+            await this.props.updateWeeklyTotals(data);
+          });
+        });
+  };
 
   selectedBodyPart = part => {
     this.setState({ selectedBodyPart: part });
@@ -70,4 +103,7 @@ const mapStateToProps = state => ({
   workoutCounts: state.homeReducer
 });
 
-export default connect(mapStateToProps)(HomeContainer);
+export default connect(
+  mapStateToProps,
+  { updateWeeklyTotals }
+)(HomeContainer);
